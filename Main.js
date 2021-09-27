@@ -19,8 +19,12 @@ const clickResponse=function()
         //assign bombs to buttons
         putBombsIn(mines,getMineOfButton(this));
         //now reveal some random group of mines, in vicinity of currently pressed button
-        revealRandomMines(this);
+        revealRandomMines(this,true);
         
+    }
+    else
+    {
+        revealRandomMines(this,false);
     }
     
     if(getMineOfButton(this).getHasBomb)
@@ -71,6 +75,7 @@ var updateStatusAndJudge=function(isRealBombMine)
     
     if(isRealBombMine)
     score++;
+    
     scoreStatus.innerHTML="Flagged: "+flagged;
     if(score==BOMB_COUNT)
     {
@@ -104,11 +109,11 @@ const getMineOfButton=function(button)
         return null;
     }
 }
-const revealRandomMines=function(currentMine)
+const revealRandomMines=function(currentMine,goFurther)
 {
     
     let p=getMineOfButton(currentMine);
-        p.startRevealChain();
+        p.startRevealChain(goFurther);
 }
 //driver code
 var scoreStatus=document.createElement("h2");

@@ -2,17 +2,19 @@ const FLAG="🚩",BOMB="💣",EMPTYSPACE="&nbsp";
 var menter=function()
 {
     //console.log("changg"); 
+    if(gameActive==false)
+    return;
     if(getMineOfButton(this).revealed==false)
     {
         
-        this.style.background="linear-gradient(#FFFFFF,#D6EAF8,#000000)";
+        this.style.background="linear-gradient(150deg,#FFFFFF,#D6EAF8,#000000)";
         this.style.boxShadow="0px 0px 40px" + " rgb(154, 73, 228)";
 
     }
 }
 var mleave=function()
 {
-    this.style.background="linear-gradient(#FFFFFF,"+getMineOfButton(this).mainColor+",#000000)";
+    this.style.background="linear-gradient(150deg,#FFFFFF,"+getMineOfButton(this).mainColor+",#000000)";
     this.style.boxShadow="none";
 }
 class Mine
@@ -54,35 +56,56 @@ class Mine
         this.revealed=true;
         
     }
-    startRevealChain=function()
+    startRevealChain=function(goFurther)
     {
         if(this.revealed)
         return;
         this.reveal();
-        console.log(this.face.id+"  is revealed");
+        //console.log(this.face.id+"  is revealed");
         let p=mines[this.location.getX][this.location.getY-1];
         if(p!=null)
         {
             if(p.getHasBomb==false)
-            p.startRevealChain();
+            {
+                if(goFurther)
+                p.startRevealChain();
+                else
+                p.reveal();
+            }
         }
         p=mines[this.location.getX][this.location.getY+1];
         if(p!=null)
         {
             if(p.getHasBomb==false)
-            p.startRevealChain();
+            {
+                if(goFurther)
+                p.startRevealChain();
+                else
+                p.reveal();
+            }
         }
         p=mines[this.location.getX+1][this.location.getY];
         if(p!=null)
         {
             if(p.getHasBomb==false)
-            p.startRevealChain();
+            {
+                if(goFurther)
+                p.startRevealChain();
+                else
+                p.reveal();
+            }
         }
         p=mines[this.location.getX-1][this.location.getY];
         if(p!=null)
         {
             if(p.getHasBomb==false)
-            p.startRevealChain();
+            {
+                if(goFurther)
+                p.startRevealChain();
+                else
+                p.reveal();
+            }
+            
         }
     }
     calculateBombs()
@@ -146,6 +169,8 @@ var flag=function(e)
     {
         this.innerHTML=EMPTYSPACE;
         flagged--;
+        if(getMineOfButton(this).getHasBomb)
+        score--;
         
     }
     else

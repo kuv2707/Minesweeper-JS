@@ -2,7 +2,7 @@
 {
     width:80px;
     height:80px;
-    background:linear-gradient(#FFFFFF,#41d0e9,#000000);
+    background:linear-gradient(150deg,#FFFFFF,#41d0e9,#000000);
     border-radius:10px;
     border:none;
     font-size:40px;
@@ -10,7 +10,7 @@
 }
 body
 {
-    background: linear-gradient(to top,#a51df3,#FFFFFF);
+    background: linear-gradient(310deg,#a51df3,#FFFFFF);
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
