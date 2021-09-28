@@ -8,6 +8,27 @@
     font-size:40px;
 
 }
+#reset
+{
+    transform: translate(50%,30%);
+    width:50%;
+    font-size:50px;
+    font-family:"Roboto Slab", sans-serif;
+    height:100px;
+    border:none;
+    border-radius:20px;
+    background: linear-gradient(150deg,#FFFFFF,#d66262,#000000);
+
+}
+*::selection
+{
+    background-color: #222222;
+    color:white;
+}
+#reset:active
+{
+    background: linear-gradient(150deg,#FFFFFF,#640808,#000000);
+}
 body
 {
     background: linear-gradient(310deg,#a51df3,#FFFFFF);

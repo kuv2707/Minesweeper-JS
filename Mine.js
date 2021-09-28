@@ -51,7 +51,7 @@ class Mine
     {
         this.face.innerHTML=this.textOnReveal;
         this.mainColor="#48C9B0";
-        this.face.style.background="linear-gradient(#FFFFFF,"+this.mainColor+",#000000)";
+        this.face.style.background="linear-gradient(150deg,#FFFFFF,"+this.mainColor+",#000000)";
         
         this.revealed=true;
         

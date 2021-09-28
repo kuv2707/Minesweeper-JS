@@ -135,4 +135,11 @@ for(let i=0;i<8;i++)
 
     //document.write("<br>");
 }
-console.log(scoreStatus.innerHTML);
+var reset=document.createElement("button");
+reset.id="reset";
+reset.innerHTML="Reset";
+allContainer.appendChild(reset);
+reset.addEventListener("click",function()
+{
+    location.reload();
+});
