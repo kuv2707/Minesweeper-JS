@@ -57,6 +57,12 @@ class Mine
         if(this.getHasBomb==false)
         score++;
         this.revealed=true;
+        if(this.face.innerHTML==FLAG)
+        {
+            flagged--;
+            refreshStatusLabel();
+        }
+        
         
     }
     startRevealChain=function(goFurther)
@@ -191,7 +197,7 @@ var flag=function(e)
     }
     
     
-    scoreStatus.innerHTML="Flagged: "+flagged;
+    refreshStatusLabel();
         
     
     

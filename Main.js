@@ -116,6 +116,10 @@ const revealRandomMines=function(currentMine,goFurther)
     let p=getMineOfButton(currentMine);
         p.startRevealChain(goFurther);
 }
+function refreshStatusLabel()
+{
+    scoreStatus.innerHTML="Flagged: "+flagged;
+}
 //driver code
 var scoreStatus=document.createElement("h2");
 scoreStatus.id="scoreStatus";
