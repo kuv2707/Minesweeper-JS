@@ -50,12 +50,13 @@ class Mine
     
     reveal=function()
     {
-        
+        if(this.revealed)
+        return;
         this.face.innerHTML=this.textOnReveal;
         this.mainAppearance="linear-gradient(150deg,#333333,#48C9B0,#000000)";
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
-        score++;
+        increaseScore();
         this.revealed=true;
         if(this.face.innerHTML==FLAG)
         {
@@ -71,7 +72,7 @@ class Mine
         return;
         this.reveal();
         //console.log(this.face.id+"  is revealed");
-        let p=mines[this.location.getX][this.location.getY-1];
+        let p=getMineAt(this.location.getX,this.location.getY-1);
         if(p!=null)
         {
             if(p.getHasBomb==false)
@@ -82,7 +83,7 @@ class Mine
                 p.reveal();
             }
         }
-        p=mines[this.location.getX][this.location.getY+1];
+        p=getMineAt(this.location.getX,this.location.getY+1);
         if(p!=null)
         {
             if(p.getHasBomb==false)
@@ -93,7 +94,7 @@ class Mine
                 p.reveal();
             }
         }
-        p=mines[this.location.getX+1][this.location.getY];
+        p=getMineAt(this.location.getX+1,this.location.getY);
         if(p!=null)
         {
             if(p.getHasBomb==false)
@@ -104,7 +105,7 @@ class Mine
                 p.reveal();
             }
         }
-        p=mines[this.location.getX-1][this.location.getY];
+        p=getMineAt(this.location.getX-1,this.location.getY);
         if(p!=null)
         {
             if(p.getHasBomb==false)

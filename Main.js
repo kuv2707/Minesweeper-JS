@@ -29,11 +29,11 @@ const clickResponse=function()
     {
         revealRandomMines(this,false);
     }
-    
+    getMineOfButton(this).reveal();
     if(getMineOfButton(this).getHasBomb)
     {
         
-        //reveal all bomb mines
+        //reveal all bomb mines and show losing message
         mines.forEach(function(sda)
         {
             sda.forEach(function(e)
@@ -43,10 +43,27 @@ const clickResponse=function()
             });
         });
         fireGameEnd(false);
+        return;
     }
-    getMineOfButton(this).reveal();
+    
+}
+function increaseScore()
+{
+    score++;
+    
     if(score==(xLim*yLim)-BOMB_COUNT)
     fireGameEnd(true);
+}
+function getMineAt(x,y)
+{
+    if(isOutOfBounds(x,y))
+    {
+        //console.log(x,y,"are out of bounds");
+        return null;
+    }
+    
+    else
+    return mines[x][y];
 }
 var putBombsIn=function(minesArray,except)
 {
@@ -73,7 +90,7 @@ var putBombsIn=function(minesArray,except)
     {
         
     }
-    console.log("put the bombs!");
+    //console.log("put the bombs!");
     //make all buttons calculate number of bomb buttons in their vicinity
     mines.forEach(row =>
         {
@@ -86,11 +103,12 @@ const fireGameEnd=function(boolResult)
     if(boolResult)
     {
         scoreStatus.innerHTML="🎆You WON!🎆";
+        scoreStatus.style.color="rgb(15, 92, 50)";
     }
     else
     {
         scoreStatus.innerHTML="You LOST!!🤦🏻‍♂️";
-        
+        scoreStatus.style.color="rgb(143, 9, 47)";
     }
     
     gameActive=false;
@@ -120,7 +138,7 @@ function refreshStatusLabel()
 {
     scoreStatus.innerHTML="Flagged: "+flagged;
 }
-//driver code
+
 var scoreStatus=document.createElement("h2");
 scoreStatus.id="scoreStatus";
 allContainer.appendChild(scoreStatus);
@@ -129,6 +147,7 @@ allContainer.appendChild(buttonContainer);
 buttonContainer.style.width=(xLim*80+10)+"px";
 buttonContainer.style.height=(yLim*80+10)+"px";
 document.body.appendChild(allContainer);
+//create mine objects
 for(let i=0;i<xLim;i++)
 {
     let row=new Array();
@@ -150,3 +169,18 @@ reset.addEventListener("click",function()
 {
     location.reload();
 });
+var x=0;
+setInterval(function()
+{
+    let red=93;
+    let green=170;
+    let blue=Math.sin(x)*100+127;
+    x+=0.05;
+    //console.log(x);
+    let color="rgb("+red+','+green+','+blue+')';
+    var bodyStyle=document.querySelector("body").style;
+    //console.log(body.style);
+    bodyStyle.background="linear-gradient(140deg,#FFFFFF,"+color+")";
+    bodyStyle.backgroundRepeat="no-repeat";
+    bodyStyle.backgroundAttachment="fixed";
+},300);

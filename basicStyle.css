@@ -33,7 +33,7 @@
 }
 body
 {
-    background: linear-gradient(310deg,#a51df3,#FFFFFF);
+    background: linear-gradient(310deg,#1a69b3,#FFFFFF);
     background-repeat: no-repeat;
     background-attachment: fixed;
     animation:fadeIn ease 5s;
@@ -59,5 +59,7 @@ body
 {
     font-size:60px;
     text-align: center;
-    text-shadow:16px 20px 10px #351313;
+    text-shadow:16px 20px 12px #351313;
+    font-family:"Roboto Slab", sans-serif;
+    
 }
