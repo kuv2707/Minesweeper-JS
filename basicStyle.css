@@ -25,23 +25,29 @@
     background-color: #222222;
     color:white;
 }
-#reset:active
+
+#reset:hover
 {
-    background: linear-gradient(150deg,#FFFFFF,#640808,#000000);
+    box-Shadow:20px 30px 50px #351313;
+    background: linear-gradient(150deg,#FFFFFF,#e43d3d,#000000);
 }
 body
 {
     background: linear-gradient(310deg,#a51df3,#FFFFFF);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    animation:fadeIn ease 5s;
 }
-#buttonContainer
+@keyframes fadeIn
 {
-    
-    width:650px;
-    height:650px;
-    margin-right:15px;
-    
+    0%
+    {
+        opacity:0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
 }
 #ALLCONTAINER
 {
@@ -53,4 +59,5 @@ body
 {
     font-size:60px;
     text-align: center;
+    text-shadow:16px 20px 10px #351313;
 }

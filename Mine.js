@@ -1,20 +1,21 @@
 const FLAG="🚩",BOMB="💣",EMPTYSPACE="&nbsp";
 var menter=function()
 {
-    //console.log("changg"); 
+ 
     if(gameActive==false)
     return;
+    
     if(getMineOfButton(this).revealed==false)
     {
         
         this.style.background="linear-gradient(150deg,#FFFFFF,#D6EAF8,#000000)";
-        this.style.boxShadow="0px 0px 40px" + " rgb(154, 73, 228)";
+        this.style.boxShadow="0px 0px 60px" + " rgb(154, 73, 228)";
 
     }
 }
 var mleave=function()
 {
-    this.style.background="linear-gradient(150deg,#FFFFFF,"+getMineOfButton(this).mainColor+",#000000)";
+    this.style.background=getMineOfButton(this).mainAppearance;
     this.style.boxShadow="none";
 }
 class Mine
@@ -26,7 +27,7 @@ class Mine
         this.hasBomb=false;
         this.revealed=false;
         this.textOnReveal="";
-        this.mainColor="#41d0e9";
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#41d0e9,#000000)";
         this.face.id=""+this.location.getX+location.getY;
         this.face.className="Mines";
         this.face.innerHTML=EMPTYSPACE;
@@ -49,10 +50,12 @@ class Mine
     
     reveal=function()
     {
-        this.face.innerHTML=this.textOnReveal;
-        this.mainColor="#48C9B0";
-        this.face.style.background="linear-gradient(150deg,#FFFFFF,"+this.mainColor+",#000000)";
         
+        this.face.innerHTML=this.textOnReveal;
+        this.mainAppearance="linear-gradient(150deg,#333333,#48C9B0,#000000)";
+        this.face.style.background=this.mainAppearance;
+        if(this.getHasBomb==false)
+        score++;
         this.revealed=true;
         
     }
@@ -127,7 +130,14 @@ class Mine
                 c++;
             }
         }
-        this.setTextOnReveal(""+c);
+        if(c!=0)
+        {
+            this.setTextOnReveal(""+c);
+        }
+        else{
+            this.setTextOnReveal(EMPTYSPACE);
+        }
+        
     }
     set setHasBomb(b)
     {
@@ -167,10 +177,9 @@ var flag=function(e)
     
     if(this.innerHTML==FLAG)
     {
-        this.innerHTML=EMPTYSPACE;
+        this.innerHTML=EMPTYSPACE;//not putting it in textOnReveal as flag has to be shown even when not revealed the mine and it has to disappear when revealed, which happens in reveal function
         flagged--;
-        if(getMineOfButton(this).getHasBomb)
-        score--;
+        
         
     }
     else
@@ -182,14 +191,14 @@ var flag=function(e)
     }
     
     
-    updateStatusAndJudge(getMineOfButton(this).getHasBomb);
+    scoreStatus.innerHTML="Flagged: "+flagged;
         
     
     
 }
 var isOutOfBounds=function(x,y)
 {
-    let dec= (x>=0 &&  y<=7  &&  x<=7  &&  y>=0);
+    let dec= (x>=0 &&  y<yLim  &&  x<xLim  &&  y>=0);
     //console.log(x,y,dec);
     return !dec;
 }

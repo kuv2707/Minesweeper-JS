@@ -7,10 +7,13 @@ var gameActive=true;
 var flagged=0;
 var score=0;
 const BOMB_COUNT=10;
+const xLim=8;
+const yLim=8;
+const buttonSize=80;
 var mines=new Array();//DDA containing all the Mine objects at index corresponding to their position
 const clickResponse=function()
 {
-    //console.log(this.id);
+    
     if(gameActive==false)
     return;
     if(zeroState)//means clicked for the first time
@@ -42,26 +45,33 @@ const clickResponse=function()
         fireGameEnd(false);
     }
     getMineOfButton(this).reveal();
-    if(score==BOMB_COUNT)
-    {
-        fireGameEnd(true);
-    }
+    if(score==(xLim*yLim)-BOMB_COUNT)
+    fireGameEnd(true);
 }
 var putBombsIn=function(minesArray,except)
 {
-    let c=0;
-    while(c<BOMB_COUNT)
+    let i=-1,j=-1;
+    try
     {
-        let i=Math.round(Math.random()*7);
-        let j=Math.round(Math.random()*7);
-        if(minesArray[i][j]===except)
-        continue;
-        if(minesArray[i][j].getHasBomb==false)
+        let c=0;
+        while(c<BOMB_COUNT)
         {
-            minesArray[i][j].setHasBomb=true;
-            c++;
-        }
+             i=Number(Math.round(Math.random()*(xLim-1)));
+             j=Number(Math.round(Math.random()*(yLim-1)));
+            
+            if(minesArray[i][j]===except)
+            continue;
+            if(minesArray[i][j].getHasBomb==false)
+            {
+                minesArray[i][j].setHasBomb=true;
+                c++;
+            }
 
+        }
+    }
+    catch(error)
+    {
+        
     }
     console.log("put the bombs!");
     //make all buttons calculate number of bomb buttons in their vicinity
@@ -70,27 +80,16 @@ var putBombsIn=function(minesArray,except)
             row.forEach(c => c.calculateBombs());
         });
 }
-var updateStatusAndJudge=function(isRealBombMine)
-{
-    
-    if(isRealBombMine)
-    score++;
-    
-    scoreStatus.innerHTML="Flagged: "+flagged;
-    if(score==BOMB_COUNT)
-    {
-        fireGameEnd(true);
-    }
-}
+
 const fireGameEnd=function(boolResult)
 {
     if(boolResult)
     {
-        scoreStatus.innerHTML="WON!🎆";
+        scoreStatus.innerHTML="🎆You WON!🎆";
     }
     else
     {
-        scoreStatus.innerHTML="LOST!!!🤦🏻‍♂️";
+        scoreStatus.innerHTML="You LOST!!🤦🏻‍♂️";
         
     }
     
@@ -98,6 +97,7 @@ const fireGameEnd=function(boolResult)
 }
 const getMineOfButton=function(button)
 {
+    
     try
     {
         let i=button.id.charAt(0);
@@ -106,6 +106,7 @@ const getMineOfButton=function(button)
     }
     catch(error)
     {
+        console.log(button);
         return null;
     }
 }
@@ -121,11 +122,13 @@ scoreStatus.id="scoreStatus";
 allContainer.appendChild(scoreStatus);
 scoreStatus.innerHTML="Flagged:0";
 allContainer.appendChild(buttonContainer);
+buttonContainer.style.width=(xLim*80+10)+"px";
+buttonContainer.style.height=(yLim*80+10)+"px";
 document.body.appendChild(allContainer);
-for(let i=0;i<8;i++)
+for(let i=0;i<xLim;i++)
 {
     let row=new Array();
-    for(let j=0;j<8;j++)
+    for(let j=0;j<yLim;j++)
     {
         let b=new Mine(new Point(i,j),clickResponse);
         buttonContainer.appendChild(b.face);
