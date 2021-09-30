@@ -18,6 +18,7 @@ var mleave=function()
     this.style.background=getMineOfButton(this).mainAppearance;
     this.style.boxShadow="none";
 }
+const colorArray=["black","#11e5f0","#e6e629","#ebac7c","#d97d14","#eb6b57","#e0420d","#ed1515","#960e0e"];
 class Mine
 {
     constructor(location,clickResponse)
@@ -44,6 +45,10 @@ class Mine
     setTextOnReveal(text)
     {
         this.textOnReveal=text;
+        if(isNaN(text)==false)
+        {
+            this.face.style.color=colorArray[Number(text)];
+        }
         //nothing can be done on a mine after it has been revealed
         
     }
