@@ -1,4 +1,4 @@
-const FLAG="🚩",BOMB="💣",EMPTYSPACE="&nbsp";
+const FLAG="🚩",BOMB="💣",EMPTYSPACE="&nbsp",DOUBT="❓";
 var menter=function()
 {
  
@@ -57,17 +57,18 @@ class Mine
     {
         if(this.revealed)
         return;
+        if(this.face.innerHTML==FLAG)
+        {
+            flagged--;
+            refreshStatusLabel();
+        }
         this.face.innerHTML=this.textOnReveal;
         this.mainAppearance="linear-gradient(150deg,#333333,#48C9B0,#000000)";
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();
         this.revealed=true;
-        if(this.face.innerHTML==FLAG)
-        {
-            flagged--;
-            refreshStatusLabel();
-        }
+        
         
         
     }
@@ -189,10 +190,14 @@ var flag=function(e)
     
     if(this.innerHTML==FLAG)
     {
-        this.innerHTML=EMPTYSPACE;//not putting it in textOnReveal as flag has to be shown even when not revealed the mine and it has to disappear when revealed, which happens in reveal function
+        this.innerHTML=DOUBT;//not putting it in textOnReveal as flag has to be shown even when not revealed the mine and it has to disappear when revealed, which happens in reveal function
         flagged--;
         
         
+    }
+    else if(this.innerHTML==DOUBT)
+    {
+        this.innerHTML=EMPTYSPACE;
     }
     else
     {

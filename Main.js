@@ -65,7 +65,7 @@ function getMineAt(x,y)
     else
     return mines[x][y];
 }
-var putBombsIn=function(minesArray,except)
+function putBombsIn(minesArray,except)
 {
     let i=-1,j=-1;
     try
@@ -107,7 +107,7 @@ const fireGameEnd=function(boolResult)
     }
     else
     {
-        scoreStatus.innerHTML="You LOST!!🤦🏻‍♂️";
+        scoreStatus.innerHTML="🤦🏻‍♂️You LOST!!🙄";
         scoreStatus.style.color="rgb(143, 9, 47)";
     }
     
