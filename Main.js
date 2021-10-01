@@ -26,6 +26,7 @@ const clickResponse=function()
     {
         zeroState=false;
         //start timer
+        timer.innerHTML="Time elapsed: 00:00";
         timerID=setInterval(function()
         {
             seconds++;
