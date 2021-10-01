@@ -11,6 +11,12 @@ const xLim=8;
 const yLim=8;
 const buttonSize=80;
 var mines=new Array();//DDA containing all the Mine objects at index corresponding to their position
+/**
+ * 
+ *  make a function to initialize all variables and the reset button will just call this function
+ * so that reloading page is not needed to restart game
+ */
+var timerID;
 const clickResponse=function()
 {
     
@@ -19,10 +25,28 @@ const clickResponse=function()
     if(zeroState)//means clicked for the first time
     {
         zeroState=false;
+        //start timer
+        timerID=setInterval(function()
+        {
+            seconds++;
+            if(seconds==60)
+            {
+                seconds=0;
+                minutes++;
+                if(minutes==60)
+                {
+                    minutes=0;
+                    hours++;
+                }
+
+            }
+            refreshTimer();
+        },1000);
         //assign bombs to buttons
         putBombsIn(mines,getMineOfButton(this));
         //now reveal some random group of mines, in vicinity of currently pressed button
         revealRandomMines(this,true);
+        
         
     }
     else
@@ -112,6 +136,7 @@ const fireGameEnd=function(boolResult)
     }
     
     gameActive=false;
+    clearInterval(timerID);
 }
 const getMineOfButton=function(button)
 {
@@ -140,8 +165,10 @@ function refreshStatusLabel()
 }
 
 var scoreStatus=document.createElement("h2");
+var timer=document.createElement("h4");
 scoreStatus.id="scoreStatus";
 allContainer.appendChild(scoreStatus);
+allContainer.appendChild(timer);
 scoreStatus.innerHTML="Flagged:0";
 allContainer.appendChild(buttonContainer);
 buttonContainer.style.width=(xLim*80+10)+"px";
@@ -183,4 +210,23 @@ setInterval(function()
     bodyStyle.background="linear-gradient(140deg,#FFFFFF,"+color+")";
     bodyStyle.backgroundRepeat="no-repeat";
     bodyStyle.backgroundAttachment="fixed";
-},300);
+},200);
+var seconds=0,minutes=0,hours=0;
+
+function refreshTimer()
+{
+    if(hours==0)
+    {
+        timer.innerHTML="Time elapsed: "+putZeroBefore(minutes)+":"+putZeroBefore(seconds);
+
+    }
+    else
+    {
+        timer.innerHTML="Time elapsed: "+putZeroBefore(hours)+":"+putZeroBefore(minutes)+":"+putZeroBefore(seconds);
+        
+    }
+}
+function putZeroBefore(numb)
+{
+    return (numb<10?'0':'')+numb;
+}
