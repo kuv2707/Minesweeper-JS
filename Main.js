@@ -165,7 +165,9 @@ function refreshStatusLabel()
 }
 
 var scoreStatus=document.createElement("h2");
+
 var timer=document.createElement("h4");
+timer.innerHTML="Tap/Click on a tile to begin the game";
 scoreStatus.id="scoreStatus";
 allContainer.appendChild(scoreStatus);
 allContainer.appendChild(timer);
