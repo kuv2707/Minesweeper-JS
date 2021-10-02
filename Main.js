@@ -7,8 +7,8 @@ var gameActive=true;
 var flagged=0;
 var score=0;
 const BOMB_COUNT=10;
-const xLim=8;
-const yLim=8;
+const xLim=10;
+const yLim=10;
 const buttonSize=80;
 var mines=new Array();//DDA containing all the Mine objects at index corresponding to their position
 /**
