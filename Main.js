@@ -233,7 +233,7 @@ const initializeGame=function()
         });
     });
     seconds=0,minutes=0,hours=0;
-    timer.innerHTML="Tap/Click on a tile to begin the game";
+    timer.innerHTML="Tap on a tile to begin the game";
     scoreStatus.innerHTML="Flagged:0";
     scoreStatus.style.color="rgb(0,0,0)";
     clearInterval(timerID);
