@@ -170,7 +170,7 @@ for(let i=0;i<xLim;i++)
 var inst;
 reset.addEventListener("click",function()
 {
-    let sc=-1;
+    
     let x=1;
     clearInterval(inst);
     inst=setInterval(function()
