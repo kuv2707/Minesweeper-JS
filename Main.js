@@ -169,6 +169,20 @@ for(let i=0;i<xLim;i++)
 }
 reset.addEventListener("click",function()
 {
+    let sc=-1;
+    let x=1;
+    let inst=setInterval(function()
+    {
+        allContainer.style.opacity=Math.pow(Math.cos(x),2);
+        x+=Math.PI/100;
+        if(Math.abs(x-Math.PI)<0.2)
+        {
+            allContainer.style.opacity=1;
+            clearInterval(inst);
+        }
+        
+
+    },40);
     initializeGame();
 });
 var x=0;
