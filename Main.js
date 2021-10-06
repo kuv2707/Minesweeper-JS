@@ -167,11 +167,13 @@ for(let i=0;i<xLim;i++)
     }
     mines.push(row);
 }
+var inst;
 reset.addEventListener("click",function()
 {
     let sc=-1;
     let x=1;
-    let inst=setInterval(function()
+    clearInterval(inst);
+    inst=setInterval(function()
     {
         allContainer.style.opacity=Math.pow(Math.cos(x),2);
         x+=Math.PI/100;
