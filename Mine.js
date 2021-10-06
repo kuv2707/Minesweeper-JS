@@ -27,7 +27,7 @@ class Mine
         this.face=document.createElement("button");
         this.hasBomb=false;
         this.revealed=false;
-        this.textOnReveal="";
+        this.textOnReveal=EMPTYSPACE;
         this.mainAppearance="linear-gradient(150deg,#FFFFFF,#41d0e9,#000000)";
         this.face.id=""+this.location.getX+location.getY;
         this.face.className="Mines";
@@ -41,7 +41,16 @@ class Mine
         this.face.addEventListener('contextmenu',flag);
         
     }
-    
+    refresh()
+    {
+        
+        this.hasBomb=false;
+        this.revealed=false;
+        this.textOnReveal=EMPTYSPACE;
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#41d0e9,#000000)";
+        this.face.style.background=this.mainAppearance;
+        this.face.innerHTML=EMPTYSPACE;
+    }
     setTextOnReveal(text)
     {
         this.textOnReveal=text;
@@ -49,7 +58,7 @@ class Mine
         {
             this.face.style.color=colorArray[Number(text)];
         }
-        //nothing can be done on a mine after it has been revealed
+        //nothing can be done on a mine after it has been revealed, except refreshing it
         
     }
     
@@ -68,9 +77,6 @@ class Mine
         if(this.getHasBomb==false)
         increaseScore();
         this.revealed=true;
-        
-        
-        
     }
     startRevealChain=function(goFurther)
     {
@@ -191,9 +197,7 @@ var flag=function(e)
     if(this.innerHTML==FLAG)
     {
         this.innerHTML=DOUBT;//not putting it in textOnReveal as flag has to be shown even when not revealed the mine and it has to disappear when revealed, which happens in reveal function
-        flagged--;
-        
-        
+        flagged--;        
     }
     else if(this.innerHTML==DOUBT)
     {
@@ -206,22 +210,13 @@ var flag=function(e)
         flagged++;
         this.innerHTML=FLAG;
     }
-    
-    
     refreshStatusLabel();
-        
-    
-    
 }
 var isOutOfBounds=function(x,y)
 {
     let dec= (x>=0 &&  y<yLim  &&  x<xLim  &&  y>=0);
-    //console.log(x,y,dec);
     return !dec;
 }
-
-
-
 class Point
 {
     constructor(x,y)
