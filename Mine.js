@@ -18,6 +18,7 @@ var mleave=function()
     this.style.background=getMineOfButton(this).mainAppearance;
     this.style.boxShadow="none";
 }
+var defCol="#156e8e";
 const colorArray=["black","#11e5f0","#e6e629","#ebac7c","#d97d14","#eb6b57","#e0420d","#ed1515","#960e0e"];
 class Mine
 {
@@ -28,7 +29,7 @@ class Mine
         this.hasBomb=false;
         this.revealed=false;
         this.textOnReveal=EMPTYSPACE;
-        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#2de620,#000000)";
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+defCol+")";
         this.face.style.background=this.mainAppearance;
         this.face.id=""+this.location.getX+location.getY;
         this.face.className="Mines";
@@ -48,7 +49,7 @@ class Mine
         this.hasBomb=false;
         this.revealed=false;
         this.textOnReveal=EMPTYSPACE;
-        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#1ec996,#000000)";
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+defCol+")";
         this.face.style.background=this.mainAppearance;
         this.face.innerHTML=EMPTYSPACE;
     }
@@ -59,6 +60,7 @@ class Mine
             this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+newcol+")";
             this.face.style.background=this.mainAppearance;
         }
+        defCol=newcol;
     }
     setTextOnReveal(text)
     {
