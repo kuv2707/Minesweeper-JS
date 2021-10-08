@@ -2,7 +2,6 @@
 {
     width:80px;
     height:80px;
-    background:linear-gradient(150deg,#FFFFFF,#41d0e9,#000000);
     border-radius:10px;
     border:none;
     font-size:48px;
@@ -10,14 +9,14 @@
 }
 #reset
 {
-    transform: translate(50%,30%);
-    width:50%;
+    transform: translate(10%,30%);
+    width:40%;
     font-size:50px;
     font-family:"Roboto Slab", sans-serif;
     height:100px;
     border:none;
     border-radius:20px;
-    background: linear-gradient(150deg,#FFFFFF,#d66262,#000000);
+    background: linear-gradient(150deg,#FFFFFF,#df3630,#000000);
 
 }
 *::selection
@@ -37,7 +36,8 @@ body
     background-repeat: no-repeat;
     background-attachment: fixed;
     animation:fadeIn ease 5s;
-    webkit-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 @keyframes fadeIn
 {
@@ -71,4 +71,58 @@ h4
     text-shadow:16px 20px 12px #665a5a;
     font-family:"Roboto Slab", sans-serif;
     
+}
+dialog{
+    font-size:50px;
+    background: linear-gradient(150deg,#fff,#345599);
+    border:none;
+    border-radius:30px;
+    width:600px;
+    height:600px;
+    
+}
+#settings
+{
+    transform: translate(40%,30%);
+    width:40%;
+    font-size:50px;
+    font-family:"Roboto Slab", sans-serif;
+    height:100px;
+    border:none;
+    border-radius:20px;
+    color:White;
+    background: linear-gradient(150deg,#FFFFFF,#0313fc,#000000);
+
+}
+#settings:hover
+{
+    box-Shadow:20px 30px 50px #351313;
+    background: linear-gradient(150deg,#FFFFFF,#5071ce,#000000);
+}
+input
+{
+    transform: translateX(30%);
+    width:40%;
+    height:10%;
+    display: inline-block;
+}
+h6{
+    
+    display: inline-block;
+}
+#return{
+    font-size:50px;
+    width:40%;
+    height:70px;
+    transform:translate(70%,0%);
+    border:none;
+    border-radius:20px;
+    color:White;
+    background: linear-gradient(150deg,#FFFFFF,#b329ac,#000000);
+
+}
+#return:hover
+{
+    box-Shadow:20px 30px 50px #351313;
+    background: linear-gradient(150deg,#FFFFFF,#e46e95,#000000);
 }

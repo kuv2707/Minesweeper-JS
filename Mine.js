@@ -28,7 +28,8 @@ class Mine
         this.hasBomb=false;
         this.revealed=false;
         this.textOnReveal=EMPTYSPACE;
-        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#41d0e9,#000000)";
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#2de620,#000000)";
+        this.face.style.background=this.mainAppearance;
         this.face.id=""+this.location.getX+location.getY;
         this.face.className="Mines";
         this.face.innerHTML=EMPTYSPACE;
@@ -47,9 +48,17 @@ class Mine
         this.hasBomb=false;
         this.revealed=false;
         this.textOnReveal=EMPTYSPACE;
-        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#41d0e9,#000000)";
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#1ec996,#000000)";
         this.face.style.background=this.mainAppearance;
         this.face.innerHTML=EMPTYSPACE;
+    }
+    setNewColorAs(newcol)
+    {
+        if(this.revealed==false)
+        {
+            this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+newcol+")";
+            this.face.style.background=this.mainAppearance;
+        }
     }
     setTextOnReveal(text)
     {
@@ -72,7 +81,7 @@ class Mine
             refreshStatusLabel();
         }
         this.face.innerHTML=this.textOnReveal;
-        this.mainAppearance="linear-gradient(150deg,#CCCCCD,#3458eb,#41d0e9)";
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#750a05)";
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();

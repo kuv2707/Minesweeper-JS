@@ -243,3 +243,38 @@ const colChang=function()
 {
 
 }
+
+var dialog=document.createElement("dialog");
+let lab1=document.createElement('h6');
+lab1.innerHTML="Background Color";
+dialog.appendChild(lab1);
+let cp=document.createElement("input");
+cp.type="color";
+dialog.appendChild(cp);
+allContainer.appendChild(dialog);
+let ret=document.createElement("button");
+ret.innerHTML="Done";
+ret.id="return";
+dialog.appendChild(ret);
+
+var settingsButton=document.createElement("button");
+settingsButton.innerHTML="Settings";
+settingsButton.id="settings";
+allContainer.appendChild(settingsButton);
+settingsButton.addEventListener("click",function()
+{
+dialog.showModal();
+});
+ret.addEventListener("click",function()
+{
+    dialog.close();
+    let newcol=cp.value;
+    console.log(newcol);
+    mines.forEach(function(mine)
+    {
+        mine.forEach(function(min)
+        {
+            min.setNewColorAs(newcol);
+        });
+    });
+});
