@@ -3,7 +3,7 @@ const allContainer=document.createElement("div");
 allContainer.id="ALLCONTAINER";
 buttonContainer.id="buttonContainer";
 var zeroState,gameActive,flagged,score;
-const BOMB_COUNT=15, xLim=9, yLim=9, buttonSize=80;
+const BOMB_COUNT=15, xLim=7, yLim=7, buttonSize=80;
 /**
  * DDA containing all the Mine objects at index corresponding to their position
  */
