@@ -5,31 +5,15 @@
     border-radius:18px;
     border:#000000;
     font-size:48px;
-
+    margin:auto;
 }
-#reset
-{
-    transform: translate(10%,30%);
-    width:40%;
-    font-size:50px;
-    font-family:"Roboto Slab", sans-serif;
-    height:100px;
-    border:none;
-    border-radius:20px;
-    background: linear-gradient(150deg,#FFFFFF,#df3630,#000000);
 
-}
 *::selection
 {
     background-color: #222222;
     color:white;
 }
 
-#reset:hover
-{
-    box-Shadow:20px 30px 50px #351313;
-    background: linear-gradient(150deg,#FFFFFF,#e43d3d,#000000);
-}
 body
 {
     background: linear-gradient(310deg,#1a69b3,#FFFFFF);
@@ -52,9 +36,15 @@ body
 }
 #ALLCONTAINER
 {
-    position:absolute;
-    left:50%;
-    transform: translateX(-50%);
+    margin:auto;
+    width:50%;
+    
+
+}
+#buttonContainer
+{
+    margin:auto;
+    width:50%;
 }
 #scoreStatus
 {
@@ -81,11 +71,32 @@ dialog{
     height:600px;
     
 }
+#reset
+{
+    margin:auto;
+    clear: right;
+    margin-top:40px;
+    width:50%;
+    font-size:50px;
+    font-family:"Roboto Slab", sans-serif;
+    height:100px;
+    border:none;
+    border-radius:20px;
+    background: linear-gradient(150deg,#FFFFFF,#df3630,#000000);
+
+}
+
+#reset:hover
+{
+    box-Shadow:20px 30px 50px #351313;
+    background: linear-gradient(150deg,#FFFFFF,#e43d3d,#000000);
+}
 #settings
 {
-    transform: translate(40%,30%);
-    width:40%;
+    margin:auto;
+    width:50%;
     font-size:50px;
+    margin-top:40px;
     font-family:"Roboto Slab", sans-serif;
     height:100px;
     border:none;

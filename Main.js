@@ -147,10 +147,10 @@ scoreStatus.id="scoreStatus";
 reset.id="reset";
 reset.innerHTML="Reset";
 
-allContainer.appendChild(scoreStatus);
-allContainer.appendChild(timer);
+buttonContainer.appendChild(scoreStatus);
+buttonContainer.appendChild(timer);
 allContainer.appendChild(buttonContainer);
-allContainer.appendChild(reset);
+
 buttonContainer.style.width=(xLim*80+10)+"px";
 buttonContainer.style.height=(yLim*80+10)+"px";
 document.body.appendChild(allContainer);
@@ -167,6 +167,7 @@ for(let i=0;i<xLim;i++)
     }
     mines.push(row);
 }
+buttonContainer.appendChild(reset);
 var inst;
 reset.addEventListener("click",function()
 {
@@ -260,7 +261,7 @@ dialog.appendChild(ret);
 var settingsButton=document.createElement("button");
 settingsButton.innerHTML="Settings";
 settingsButton.id="settings";
-allContainer.appendChild(settingsButton);
+buttonContainer.appendChild(settingsButton);
 settingsButton.addEventListener("click",function()
 {
 dialog.showModal();
