@@ -271,6 +271,7 @@ ret.addEventListener("click",function()
     dialog.close();
     let newcol=cp.value;
     console.log(newcol);
+    document.querySelector('meta[name="theme-color"]').setAttribute('content',  newcol);
     mines.forEach(function(mine)
     {
         mine.forEach(function(min)
