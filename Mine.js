@@ -83,7 +83,10 @@ class Mine
             refreshStatusLabel();
         }
         this.face.innerHTML=this.textOnReveal;
+        if(this.getHasBomb)
         this.mainAppearance="linear-gradient(150deg,#FFFFFF,#750a05)";
+        else
+        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#067022)";
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();

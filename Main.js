@@ -1,8 +1,8 @@
 const buttonContainer=document.createElement("div");
-const allContainer=document.createElement("div");
-allContainer.id="ALLCONTAINER";
+
+
 buttonContainer.id="buttonContainer";
-var zeroState,gameActive,flagged,score;
+var zeroState,gameActive,flagged,score=0;
 const BOMB_COUNT=15, xLim=9, yLim=9, buttonSize=80;
 /**
  * DDA containing all the Mine objects at index corresponding to their position
@@ -65,6 +65,7 @@ const clickResponse=function()
 function increaseScore()
 {
     score++;
+    console.log("incScr");
     if(score==(xLim*yLim)-BOMB_COUNT)
     fireGameEnd(true);
 }
@@ -149,11 +150,11 @@ reset.innerHTML="Reset";
 
 buttonContainer.appendChild(scoreStatus);
 buttonContainer.appendChild(timer);
-allContainer.appendChild(buttonContainer);
+
 
 buttonContainer.style.width=(xLim*80+10)+"px";
 buttonContainer.style.height=(yLim*80+10)+"px";
-document.body.appendChild(allContainer);
+document.body.appendChild(buttonContainer);
 
 //create mine objects
 for(let i=0;i<xLim;i++)
@@ -176,11 +177,11 @@ reset.addEventListener("click",function()
     clearInterval(inst);
     inst=setInterval(function()
     {
-        allContainer.style.opacity=Math.pow(Math.cos(x),2);
+        buttonContainer.style.opacity=Math.pow(Math.cos(x),2);
         x+=Math.PI/100;
         if(Math.abs(x-Math.PI)<0.2)
         {
-            allContainer.style.opacity=1;
+            buttonContainer.style.opacity=1;
             clearInterval(inst);
         }
         
@@ -251,8 +252,9 @@ lab1.innerHTML="Background Color";
 dialog.appendChild(lab1);
 let cp=document.createElement("input");
 cp.type="color";
+cp.value="#34ebeb";
 dialog.appendChild(cp);
-allContainer.appendChild(dialog);
+buttonContainer.appendChild(dialog);
 let ret=document.createElement("button");
 ret.innerHTML="Done";
 ret.id="return";
@@ -266,17 +268,21 @@ settingsButton.addEventListener("click",function()
 {
 dialog.showModal();
 });
-ret.addEventListener("click",function()
+const changeColor=function()
 {
     dialog.close();
     let newcol=cp.value;
     console.log(newcol);
+    ret.style.background="linear-gradient(150deg,#FFFFFF,"+newcol+",#000000)";
     document.querySelector('meta[name="theme-color"]').setAttribute('content',  newcol);
     mines.forEach(function(mine)
     {
         mine.forEach(function(min)
         {
             min.setNewColorAs(newcol);
+           
         });
     });
-});
+}
+ret.addEventListener("click",changeColor);
+//cp.addEventListener("mousedrag",changeColor);

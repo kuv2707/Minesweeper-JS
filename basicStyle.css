@@ -38,7 +38,7 @@ body
 {
     margin:auto;
     width:50%;
-    margin-right:200px;
+    margin-right:300px;
 
 }
 #buttonContainer
@@ -76,6 +76,7 @@ dialog{
     margin:auto;
     clear: right;
     margin-top:40px;
+    margin-left:0px;
     width:50%;
     font-size:50px;
     font-family:"Roboto Slab", sans-serif;
@@ -89,7 +90,7 @@ dialog{
 #reset:hover
 {
     box-Shadow:20px 30px 50px #351313;
-    background: linear-gradient(150deg,#FFFFFF,#e43d3d,#000000);
+    
 }
 #settings
 {
@@ -107,8 +108,8 @@ dialog{
 }
 #settings:hover
 {
-    box-Shadow:20px 30px 50px #351313;
-    background: linear-gradient(150deg,#FFFFFF,#5071ce,#000000);
+    box-Shadow:20px 30px 50px #0a1255;
+    
 }
 input
 {
@@ -123,17 +124,18 @@ h6{
 }
 #return{
     font-size:50px;
+    
     width:40%;
-    height:70px;
+    height:90px;
     transform:translate(70%,0%);
     border:none;
     border-radius:20px;
     color:White;
-    background: linear-gradient(150deg,#FFFFFF,#b329ac,#000000);
+    background: linear-gradient(150deg,#FFFFFF,#34ebeb,#000000);
 
 }
 #return:hover
 {
     box-Shadow:20px 30px 50px #351313;
-    background: linear-gradient(150deg,#FFFFFF,#e46e95,#000000);
+    background: linear-gradient(150deg,#FFFFFF,#2bc9c9,#000000);
 }
