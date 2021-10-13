@@ -182,7 +182,7 @@ reset.addEventListener("click",function()
             buttonContainer.style.opacity=1;
             clearInterval(inst);
         }
-        if(Math.abs(x-Math.PI/2)==0)
+        if(Math.abs(x-Math.PI/2)<0.1)
         {
             initializeGame();
         }
