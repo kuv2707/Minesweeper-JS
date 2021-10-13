@@ -247,7 +247,7 @@ lab1.innerHTML="Background Color";
 dialog.appendChild(lab1);
 let cp=document.createElement("input");
 cp.type="color";
-cp.value="#34ebeb";
+cp.value="#156e8e";
 dialog.appendChild(cp);
 buttonContainer.appendChild(dialog);
 let ret=document.createElement("button");
