@@ -4,8 +4,9 @@
     height:80px;
     border-radius:18px;
     border:#000000;
-    font-size:48px;
+    font-size:45px;
     margin:auto;
+    overflow: hidden;
 }
 
 *::selection
@@ -117,6 +118,9 @@ input
     width:40%;
     height:10%;
     display: inline-block;
+    border:none;
+    padding: 0px;
+    
 }
 h6{
     

@@ -77,6 +77,7 @@ class Mine
     {
         if(this.revealed)
         return;
+        this.revealed=true;
         if(this.face.innerHTML==FLAG)
         {
             flagged--;
@@ -90,7 +91,7 @@ class Mine
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();
-        this.revealed=true;
+        
     }
     startRevealChain=function(goFurther)
     {
@@ -98,51 +99,30 @@ class Mine
         return;
         this.reveal();
         //console.log(this.face.id+"  is revealed");
-        let p=getMineAt(this.location.getX,this.location.getY-1);
-        if(p!=null)
+        let arr=[0,-1,0,1,1,0,-1,0];
+        for(let i=0;i<arr.length-1;i+=2)
         {
-            if(p.getHasBomb==false)
-            {
-                if(goFurther)
-                p.startRevealChain();
-                else
-                p.reveal();
-            }
-        }
-        p=getMineAt(this.location.getX,this.location.getY+1);
-        if(p!=null)
-        {
-            if(p.getHasBomb==false)
-            {
-                if(goFurther)
-                p.startRevealChain();
-                else
-                p.reveal();
-            }
-        }
-        p=getMineAt(this.location.getX+1,this.location.getY);
-        if(p!=null)
-        {
-            if(p.getHasBomb==false)
-            {
-                if(goFurther)
-                p.startRevealChain();
-                else
-                p.reveal();
-            }
-        }
-        p=getMineAt(this.location.getX-1,this.location.getY);
-        if(p!=null)
-        {
-            if(p.getHasBomb==false)
-            {
-                if(goFurther)
-                p.startRevealChain();
-                else
-                p.reveal();
-            }
+            let p=getMineAt(this.location.getX+arr[i],this.location.getY+arr[i+1]);
             
+            if(p!=null)
+            {
+                if(p.getHasBomb==false)
+                {
+                    if(goFurther)
+                    p.startRevealChain();
+                    else
+                    {
+                        //reveal if it is not flagged
+                        if(p.face.innerHTML!=FLAG)
+                        {
+                            p.reveal();
+                        }
+                    }
+                    
+                }
+            }
         }
+        
     }
     calculateBombs()
     {
@@ -210,19 +190,18 @@ var flag=function(e)
     
     if(this.innerHTML==FLAG)
     {
-        this.innerHTML=DOUBT;//not putting it in textOnReveal as flag has to be shown even when not revealed the mine and it has to disappear when revealed, which happens in reveal function
-        flagged--;        
-    }
-    else if(this.innerHTML==DOUBT)
-    {
         this.innerHTML=EMPTYSPACE;
+        flagged--; 
+               
     }
+    
     else
     {
         if(getMineOfButton(this).revealed)
         return;
         flagged++;
         this.innerHTML=FLAG;
+        
     }
     refreshStatusLabel();
 }

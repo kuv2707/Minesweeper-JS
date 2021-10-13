@@ -1,9 +1,7 @@
 const buttonContainer=document.createElement("div");
-
-
 buttonContainer.id="buttonContainer";
 var zeroState,gameActive,flagged,score=0;
-const BOMB_COUNT=15, xLim=9, yLim=9, buttonSize=80;
+var BOMB_COUNT=15, xLim=9, yLim=9, buttonSize=80;
 /**
  * DDA containing all the Mine objects at index corresponding to their position
  */
@@ -65,7 +63,7 @@ const clickResponse=function()
 function increaseScore()
 {
     score++;
-    console.log("incScr");
+    //console.log("incScr to "+score);
     if(score==(xLim*yLim)-BOMB_COUNT)
     fireGameEnd(true);
 }
@@ -173,7 +171,7 @@ var inst;
 reset.addEventListener("click",function()
 {
     
-    let x=1;
+    let x=0.5;
     clearInterval(inst);
     inst=setInterval(function()
     {
@@ -220,13 +218,14 @@ function putZeroBefore(numb)
 }
 /**
  *  a function to initialize all variables . the reset button will just call this function
- * so that reloading page is not needed to restart game
+ * so that reloading  the page is not needed to restart game
  */
 const initializeGame=function()
 {
     zeroState=true;
     gameActive=true;
     flagged=0;
+    score=0;
     mines.forEach(function(sda)
     {
         sda.forEach(function(e)
@@ -241,10 +240,6 @@ const initializeGame=function()
     clearInterval(timerID);
 }
 initializeGame();
-const colChang=function()
-{
-
-}
 
 var dialog=document.createElement("dialog");
 let lab1=document.createElement('h6');
