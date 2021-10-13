@@ -188,7 +188,7 @@ reset.addEventListener("click",function()
         }
         
 
-    },32);
+    },20);
     
 });
 var x=0;
@@ -257,6 +257,7 @@ buttonContainer.appendChild(dialog);
 let ret=document.createElement("button");
 ret.innerHTML="Done";
 ret.id="return";
+ret.style.background="linear-gradient(150deg,#FFFFFF,#156e8e,#000000)";
 dialog.appendChild(ret);
 
 var settingsButton=document.createElement("button");

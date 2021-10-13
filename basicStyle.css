@@ -3,7 +3,7 @@
     width:80px;
     height:80px;
     border-radius:18px;
-    border:#000000;
+    border:none;
     font-size:45px;
     margin:auto;
     overflow: hidden;
@@ -135,7 +135,7 @@ h6{
     border:none;
     border-radius:20px;
     color:White;
-    background: linear-gradient(150deg,#FFFFFF,#34ebeb,#000000);
+    
 
 }
 #return:hover
