@@ -171,21 +171,25 @@ var inst;
 reset.addEventListener("click",function()
 {
     
-    let x=0.5;
+    let x=0;
     clearInterval(inst);
     inst=setInterval(function()
     {
         buttonContainer.style.opacity=Math.pow(Math.cos(x),2);
         x+=Math.PI/100;
-        if(Math.abs(x-Math.PI)<0.2)
+        if(Math.abs(x-Math.PI)<0.1)
         {
             buttonContainer.style.opacity=1;
             clearInterval(inst);
         }
+        if(Math.abs(x-Math.PI/2)==0)
+        {
+            initializeGame();
+        }
         
 
-    },40);
-    initializeGame();
+    },32);
+    
 });
 var x=0;
 setInterval(function()
