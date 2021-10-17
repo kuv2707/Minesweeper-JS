@@ -1,4 +1,3 @@
-const FLAG="🚩",BOMB="💣",EMPTYSPACE="&nbsp",DOUBT="❓";
 var menter=function()
 {
  
@@ -18,8 +17,6 @@ var mleave=function()
     this.style.background=getMineOfButton(this).mainAppearance;
     this.style.boxShadow="none";
 }
-var defCol="#156e8e";
-const colorArray=["black","#11e5f0","#e6e629","#ebac7c","#d97d14","#eb6b57","#e0420d","#ed1515","#960e0e"];
 class Mine
 {
     constructor(location,clickResponse)
@@ -207,8 +204,7 @@ var flag=function(e)
 }
 var isOutOfBounds=function(x,y)
 {
-    let dec= (x>=0 &&  y<yLim  &&  x<xLim  &&  y>=0);
-    return !dec;
+    return !(x>=0 &&  y<yLim  &&  x<xLim  &&  y>=0);
 }
 class Point
 {

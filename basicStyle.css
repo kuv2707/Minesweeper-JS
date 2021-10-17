@@ -134,7 +134,7 @@ h6{
     transform:translate(70%,0%);
     border:none;
     border-radius:20px;
-    color:White;
+    color:black;
     
 
 }
@@ -142,4 +142,12 @@ h6{
 {
     box-Shadow:20px 30px 50px #351313;
     background: linear-gradient(150deg,#FFFFFF,#2bc9c9,#000000);
+}
+canvas
+{
+    padding:0px;
+    border-radius: 25px;
+    margin:auto;
+    overflow:hidden;
+    
 }
