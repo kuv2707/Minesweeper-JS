@@ -126,9 +126,7 @@ const fireGameEnd=function(boolResult)
     clearInterval(timerID);
 
     //add this inside if statement
-     animScript=document.createElement("script");
-        animScript.src="animation.js";
-        document.body.appendChild(animScript);
+    showWinBox();
 }
 
 
@@ -218,5 +216,37 @@ function putZeroBefore(numb)
 
     },20);
     document.body.removeChild(animScript);
+    
+}
+var confettiMaker;
+function showWinBox()
+{
+    dial.style.opacity=0;
+    dial.showModal();
+    let i=0;
+    let k=setInterval(function()
+    {
+        dial.style.opacity=i;
+        i+=0.01;
+        if(i>1)
+        {
+            clearInterval(k);
+            window.requestAnimationFrame(painter);
+            confettiMaker=setInterval(function()
+            {
+                
+                for(var i=0;i<numAtOnce;i++)
+                {
+                    coll.push(new Confetti(x++));
+                    activeCount++;
+                }
+                
+                //showerX=canvas.width/2+(canvas.width/3)*Math.sin(param);
+                showerX=canvas.width/2;
+                showerY=190;
+                param+=0.03;
+            },10);
+        } 
+    },2);
     
 }

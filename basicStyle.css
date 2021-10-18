@@ -63,15 +63,7 @@ h4
     font-family:"Roboto Slab", sans-serif;
     
 }
-dialog{
-    font-size:50px;
-    background: linear-gradient(150deg,#fff,#345599);
-    border:none;
-    border-radius:30px;
-    width:600px;
-    height:600px;
-    
-}
+
 #reset
 {
     margin:auto;
@@ -146,8 +138,19 @@ h6{
 canvas
 {
     padding:0px;
-    border-radius: 25px;
+    border-radius: 30px;
     margin:auto;
+    overflow:hidden;
+    
+}
+dialog{
+    font-size:50px;
+    padding:0px;
+    background: linear-gradient(150deg,#fff,#345599);
+    border:none;
+    border-radius:30px;
+    width:640px;
+    height:540px;
     overflow:hidden;
     
 }

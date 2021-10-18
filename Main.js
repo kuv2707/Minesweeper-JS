@@ -94,3 +94,34 @@ ret.addEventListener("click",function()
         });
     });
 });
+
+var canvas=document.createElement("canvas");
+    var ctxt=canvas.getContext('2d');
+    
+    canvas.width=640;
+    canvas.height=540;
+    var dial=document.createElement("dialog");
+    
+    dial.append(canvas);
+    
+buttonContainer.append(dial);
+
+canvas.addEventListener("click",function()
+{
+    clearInterval(confettiMaker);
+    let i=1;
+    let v=setInterval(function()
+    {
+        
+        dial.style.opacity=i;
+        i-=0.01;
+        if(i<0)
+        {
+            clearInterval(v);
+            
+            dial.close();
+            resetter();
+        }        
+    },2); 
+    
+});
