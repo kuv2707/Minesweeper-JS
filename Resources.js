@@ -180,6 +180,8 @@ var resetter = function () {
     let x = 0;
     clearInterval(inst);
     clearInterval(confettiMaker);
+    
+    
     inst = setInterval(function () {
         buttonContainer.style.opacity = Math.pow(Math.cos(x), 2);
         x += Math.PI / 100;
@@ -188,6 +190,7 @@ var resetter = function () {
             clearInterval(inst);
         }
         if (Math.abs(x - Math.PI / 2) < 0.1) {
+            
             initializeGame();
         }
 
@@ -199,6 +202,7 @@ var resetter = function () {
 var confettiMaker;
 function showWinBox() {
     canvas.style.opacity = 0;
+    
     buttonContainer.removeChild(reset);
     buttonContainer.removeChild(settingsButton);
     buttonContainer.appendChild(canvas);
