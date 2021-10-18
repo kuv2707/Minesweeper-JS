@@ -1,128 +1,110 @@
-const FLAG="🚩",BOMB="💣",EMPTYSPACE="&nbsp",DOUBT="❓";
-var defCol="#156e8e";
-const colorArray=["black","#11e5f0","#e6e629","#ebac7c","#d97d14","#eb6b57","#e0420d","#ed1515","#960e0e"];
+const FLAG = "🚩", BOMB = "💣", EMPTYSPACE = "&nbsp", DOUBT = "❓";
+var defCol = "#156e8e";
+const colorArray = ["black", "#11e5f0", "#e6e629", "#ebac7c", "#d97d14", "#eb6b57", "#e0420d", "#ed1515", "#960e0e"];
 
 
-const buttonContainer=document.createElement("div");
-buttonContainer.id="buttonContainer";
-var zeroState,gameActive,flagged,score=0;
-var BOMB_COUNT=15, xLim=9, yLim=9, buttonSize=80;
+const buttonContainer = document.createElement("div");
+buttonContainer.id = "buttonContainer";
+var zeroState, gameActive, flagged, score = 0;
+var BOMB_COUNT = 15, xLim = 9, yLim = 9, buttonSize = 80;
 /**
  * DDA containing all the Mine objects at index corresponding to their position
  */
-var mines=new Array();
+var mines = new Array();
 var timerID;
 
-const clickResponse=function()
-{
-    
-    if(gameActive==false)
-    return;
-    if(zeroState)//means clicked for the first time
+const clickResponse = function () {
+
+    if (gameActive == false)
+        return;
+    if (zeroState)//means clicked for the first time
     {
-        zeroState=false;
+        zeroState = false;
         //start timer
-        timer.innerHTML="Time elapsed: 00:00";
-        timerID=setInterval(function()
-        {
+        timer.innerHTML = "Time elapsed: 00:00";
+        timerID = setInterval(function () {
             seconds++;
-            if(seconds==60)
-            {
-                seconds=0;
+            if (seconds == 60) {
+                seconds = 0;
                 minutes++;
-                if(minutes==60)
-                {
-                    minutes=0;
+                if (minutes == 60) {
+                    minutes = 0;
                     hours++;
                 }
 
             }
             refreshTimer();
-        },1000);
+        }, 1000);
         //assign bombs to buttons
-        putBombsIn(mines,getMineOfButton(this));
+        putBombsIn(mines, getMineOfButton(this));
         //now reveal some random group of mines, in vicinity of currently pressed button
-        revealRandomMines(this,true);        
+        revealRandomMines(this, true);
     }
-    else
-    {
-        revealRandomMines(this,false);
+    else {
+        revealRandomMines(this, false);
     }
     getMineOfButton(this).reveal();
-    if(getMineOfButton(this).getHasBomb)
-    {
-        
+    if (getMineOfButton(this).getHasBomb) {
+
         //reveal all bomb mines and show losing message
-        mines.forEach(function(sda)
-        {
-            sda.forEach(function(e)
-            {
-                if(e.getHasBomb)
-                e.reveal();
+        mines.forEach(function (sda) {
+            sda.forEach(function (e) {
+                if (e.getHasBomb)
+                    e.reveal();
             });
         });
         fireGameEnd(false);
         return;
     }
-    
+
 }
 
 
-function increaseScore()
-{
+function increaseScore() {
     score++;
     //console.log("incScr to "+score);
-    if(score==(xLim*yLim)-BOMB_COUNT)
-    fireGameEnd(true);
+    if (score == (xLim * yLim) - BOMB_COUNT)
+        fireGameEnd(true);
 }
-function getMineAt(x,y)
-{
-    if(isOutOfBounds(x,y))
-    {
+function getMineAt(x, y) {
+    if (isOutOfBounds(x, y)) {
         return null;
     }
     else
-    return mines[x][y];
+        return mines[x][y];
 }
-function putBombsIn(minesArray,except)
-{
-    let i=-1,j=-1;
-    let c=0;
-    while(c<BOMB_COUNT)
-    {
-         i=Number(Math.round(Math.random()*(xLim-1)));
-         j=Number(Math.round(Math.random()*(yLim-1)));
-        
-        if(minesArray[i][j]===except)
-        continue;
-        if(minesArray[i][j].getHasBomb==false)
-        {
-            minesArray[i][j].setHasBomb=true;
+function putBombsIn(minesArray, except) {
+    let i = -1, j = -1;
+    let c = 0;
+    while (c < BOMB_COUNT) {
+        i = Number(Math.round(Math.random() * (xLim - 1)));
+        j = Number(Math.round(Math.random() * (yLim - 1)));
+
+        if (minesArray[i][j] === except)
+            continue;
+        if (minesArray[i][j].getHasBomb == false) {
+            minesArray[i][j].setHasBomb = true;
             c++;
         }
 
     }
     //make all buttons calculate number of bomb buttons in their vicinity
-    mines.forEach(row =>
-    {
+    mines.forEach(row => {
         row.forEach(c => c.calculateBombs());
     });
 }
-var animScript;
-const fireGameEnd=function(boolResult)
-{
-    if(boolResult)
-    {
-        scoreStatus.innerHTML="🎆You WON!🎆";
-        scoreStatus.style.color="rgb(15, 92, 50)";
-        
+
+const fireGameEnd = function (boolResult) {
+    if (boolResult) {
+        scoreStatus.innerHTML = "🎆You WON!🎆";
+        scoreStatus.style.color = "rgb(15, 92, 50)";
+
     }
-    else
-    {
-        scoreStatus.innerHTML="🤦🏻‍♂️You LOST!!🙄";
-        scoreStatus.style.color="rgb(143, 9, 47)";
+    else {
+        scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
+        scoreStatus.style.color = "rgb(143, 9, 47)";
     }
-    gameActive=false;
+    gameActive = false;
     clearInterval(timerID);
 
     //add this inside if statement
@@ -130,44 +112,35 @@ const fireGameEnd=function(boolResult)
 }
 
 
-const getMineOfButton=function(button)
-{
-    try
-    {
-        let i=button.id.charAt(0);
-        let j=button.id.charAt(1);
+const getMineOfButton = function (button) {
+    try {
+        let i = button.id.charAt(0);
+        let j = button.id.charAt(1);
         return mines[i][j];
     }
-    catch(error)
-    {
+    catch (error) {
         return null;
     }
 }
-const revealRandomMines=function(currentMine,goFurther)
-{
-    
-    let p=getMineOfButton(currentMine);
+const revealRandomMines = function (currentMine, goFurther) {
+
+    let p = getMineOfButton(currentMine);
     p.startRevealChain(goFurther);
 }
-function refreshStatusLabel()
-{
-    scoreStatus.innerHTML="Flagged: "+flagged;
+function refreshStatusLabel() {
+    scoreStatus.innerHTML = "Flagged: " + flagged;
 }
 
-function refreshTimer()
-{
-    if(hours==0)
-    {
-        timer.innerHTML="Time elapsed: "+putZeroBefore(minutes)+":"+putZeroBefore(seconds);
+function refreshTimer() {
+    if (hours == 0) {
+        timer.innerHTML = "Time elapsed: " + putZeroBefore(minutes) + ":" + putZeroBefore(seconds);
     }
-    else
-    {
-        timer.innerHTML="Time elapsed: "+putZeroBefore(hours)+":"+putZeroBefore(minutes)+":"+putZeroBefore(seconds);
+    else {
+        timer.innerHTML = "Time elapsed: " + putZeroBefore(hours) + ":" + putZeroBefore(minutes) + ":" + putZeroBefore(seconds);
     }
 }
-function putZeroBefore(numb)
-{
-    return (numb<10?'0':'')+numb;
+function putZeroBefore(numb) {
+    return (numb < 10 ? '0' : '') + numb;
 }
 
 
@@ -175,78 +148,88 @@ function putZeroBefore(numb)
  *  a function to initialize all variables . the reset button will just call this function
  * so that reloading  the page is not needed to restart game
  */
- const initializeGame=function()
- {
-     zeroState=true;
-     gameActive=true;
-     flagged=0;
-     score=0;
-     mines.forEach(function(sda)
-     {
-         sda.forEach(function(e)
-         {
-             e.refresh();
-         });
-     });
-     seconds=0,minutes=0,hours=0;
-     timer.innerHTML="Tap/Click on a tile to begin the game";
-     scoreStatus.innerHTML="Flagged:0";
-     scoreStatus.style.color="rgb(0,0,0)";
-     clearInterval(timerID);
- }
- var resetter=function()
-{
-    
-    let x=0;
+const initializeGame = function () {
+    zeroState = true;
+    gameActive = true;
+    flagged = 0;
+    score = 0;
+    try {
+        buttonContainer.removeChild(canvas);
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+
+    mines.forEach(function (sda) {
+        sda.forEach(function (e) {
+            e.refresh();
+            buttonContainer.appendChild(e.face);
+        });
+    });
+    buttonContainer.appendChild(reset);
+    buttonContainer.appendChild(settingsButton);
+    seconds = 0, minutes = 0, hours = 0;
+    timer.innerHTML = "Tap/Click on a tile to begin the game";
+    scoreStatus.innerHTML = "Flagged:0";
+    scoreStatus.style.color = "rgb(0,0,0)";
+    clearInterval(timerID);
+}
+var resetter = function () {
+
+    let x = 0;
     clearInterval(inst);
-    inst=setInterval(function()
-    {
-        buttonContainer.style.opacity=Math.pow(Math.cos(x),2);
-        x+=Math.PI/100;
-        if(Math.abs(x-Math.PI)<0.1)
-        {
-            buttonContainer.style.opacity=1;
+    clearInterval(confettiMaker);
+    inst = setInterval(function () {
+        buttonContainer.style.opacity = Math.pow(Math.cos(x), 2);
+        x += Math.PI / 100;
+        if (Math.abs(x - Math.PI) < 0.1) {
+            buttonContainer.style.opacity = 1;
             clearInterval(inst);
         }
-        if(Math.abs(x-Math.PI/2)<0.1)
-        {
+        if (Math.abs(x - Math.PI / 2) < 0.1) {
             initializeGame();
         }
-        
 
-    },20);
-    document.body.removeChild(animScript);
-    
+
+    }, 20);
+
+
 }
 var confettiMaker;
-function showWinBox()
-{
-    dial.style.opacity=0;
-    dial.showModal();
-    let i=0;
-    let k=setInterval(function()
-    {
-        dial.style.opacity=i;
-        i+=0.01;
-        if(i>1)
-        {
+function showWinBox() {
+    canvas.style.opacity = 0;
+    buttonContainer.removeChild(reset);
+    buttonContainer.removeChild(settingsButton);
+    buttonContainer.appendChild(canvas);
+    buttonContainer.appendChild(reset);
+    buttonContainer.appendChild(settingsButton);
+    mines.forEach(sda => {
+        sda.forEach(elem => {
+            buttonContainer.removeChild(elem.face);
+        });
+    });
+
+    let i = 0;
+    let k = setInterval(function () {
+        canvas.style.opacity = i;
+        i += 0.01;
+        if (i > 1) {
             clearInterval(k);
             window.requestAnimationFrame(painter);
-            confettiMaker=setInterval(function()
-            {
-                
-                for(var i=0;i<numAtOnce;i++)
-                {
+            confettiMaker = setInterval(function () {
+
+                for (var i = 0; i < numAtOnce; i++) {
                     coll.push(new Confetti(x++));
                     activeCount++;
                 }
-                
+
                 //showerX=canvas.width/2+(canvas.width/3)*Math.sin(param);
-                showerX=canvas.width/2;
-                showerY=190;
-                param+=0.03;
-            },10);
-        } 
-    },2);
-    
+                showerX = canvas.width / 2;
+                showerY = 190;
+                param += 0.03;
+            }, 10);
+        }
+    }, 2);
+
 }
