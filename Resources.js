@@ -238,7 +238,7 @@ var resetter = function () {
 var confettiMaker;
 function showWinBox() {
     canvas.style.opacity = 0;
-    window.requestAnimationFrame(painter);
+    
     buttonContainer.removeChild(reset);
     buttonContainer.removeChild(settingsButton);
     buttonContainer.appendChild(canvas);
@@ -249,7 +249,7 @@ function showWinBox() {
             buttonContainer.removeChild(elem.face);
         });
     });
-    
+    window.requestAnimationFrame(painter);
     let i = 0;
     let k = setInterval(function () {
         canvas.style.opacity = i;
