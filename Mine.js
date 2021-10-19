@@ -28,7 +28,7 @@ class Mine
         this.textOnReveal=EMPTYSPACE;
         this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+defCol+")";
         this.face.style.background=this.mainAppearance;
-        this.face.id=""+this.location.getX+location.getY;
+        this.face.id=""+this.location.getX+","+this.location.getY;
         this.face.className="Mines";
         this.face.innerHTML=EMPTYSPACE;
         this.face.addEventListener('click',clickResponse);
@@ -38,6 +38,7 @@ class Mine
         this.face.addEventListener('mouseleave',mleave);
         this.face.addEventListener('mousemove',released);//moving is same as releasing
         this.face.addEventListener('contextmenu',flag);
+        
         
     }
     refresh()
@@ -49,6 +50,8 @@ class Mine
         this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+defCol+")";
         this.face.style.background=this.mainAppearance;
         this.face.innerHTML=EMPTYSPACE;
+        //this.face.innerHTML=this.face.id;
+        this.face.style.boxShadow="none";
     }
     setNewColorAs(newcol)
     {
@@ -88,14 +91,14 @@ class Mine
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();
-        
+        //console.log(this.face.id+"  is revealed");
     }
     startRevealChain=function(goFurther)
     {
         if(this.revealed)
         return;
         this.reveal();
-        //console.log(this.face.id+"  is revealed");
+        
         let arr=[0,-1,0,1,1,0,-1,0];
         for(let i=0;i<arr.length-1;i+=2)
         {
@@ -136,7 +139,7 @@ class Mine
                     continue;
                 }
                 
-                if(mines[i][j].getHasBomb==true)
+                if(mines[j][i].getHasBomb==true)
                 c++;
             }
         }

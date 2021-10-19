@@ -114,6 +114,15 @@ input
     padding: 0px;
     
 }
+select{
+    font-size: 40px;
+    background:transparent;
+   
+}
+label
+{
+    padding-bottom:30px;
+}
 h6{
     
     display: inline-block;
@@ -121,9 +130,9 @@ h6{
 #return{
     font-size:50px;
     
-    width:40%;
+    width:200px;
     height:90px;
-    transform:translate(70%,0%);
+    
     border:none;
     border-radius:20px;
     color:black;

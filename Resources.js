@@ -6,9 +6,12 @@ const colorArray = ["black", "#11e5f0", "#e6e629", "#ebac7c", "#d97d14", "#eb6b5
 const buttonContainer = document.createElement("div");
 buttonContainer.id = "buttonContainer";
 var zeroState, gameActive, flagged, score = 0;
-var BOMB_COUNT = 15, xLim = 9, yLim = 9, buttonSize = 80;
+var BOMB_COUNT = 15, xLim = 13, yLim = 9, buttonSize = 80;
 /**
  * DDA containing all the Mine objects at index corresponding to their position
+ * its x and y indexes are reversed as it was causing problems with alignment of buttons 
+ * when size was greater than 9
+ * ie, mines[2][3] refers to a button of id 3,2
  */
 var mines = new Array();
 var timerID;
@@ -66,7 +69,7 @@ function increaseScore() {
     if (score == (xLim * yLim) - BOMB_COUNT)
         fireGameEnd(true);
 }
-function getMineAt(x, y) {
+function getMineAt(y,x) {
     if (isOutOfBounds(x, y)) {
         return null;
     }
@@ -77,9 +80,9 @@ function putBombsIn(minesArray, except) {
     let i = -1, j = -1;
     let c = 0;
     while (c < BOMB_COUNT) {
-        i = Number(Math.round(Math.random() * (xLim - 1)));
-        j = Number(Math.round(Math.random() * (yLim - 1)));
-
+        j = Number(Math.round(Math.random() * (xLim - 1)));
+        i = Number(Math.round(Math.random() * (yLim - 1)));
+        console.log(i,j);
         if (minesArray[i][j] === except)
             continue;
         if (minesArray[i][j].getHasBomb == false) {
@@ -98,25 +101,28 @@ const fireGameEnd = function (boolResult) {
     if (boolResult) {
         scoreStatus.innerHTML = "🎆You WON!🎆";
         scoreStatus.style.color = "rgb(15, 92, 50)";
-
+        wincontent=true;
     }
     else {
         scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
         scoreStatus.style.color = "rgb(143, 9, 47)";
+        wincontent=false;
     }
     gameActive = false;
     clearInterval(timerID);
 
     //add this inside if statement
+
     showWinBox();
 }
 
 
 const getMineOfButton = function (button) {
     try {
-        let i = button.id.charAt(0);
-        let j = button.id.charAt(1);
-        return mines[i][j];
+        var str=button.id;
+        let i = str.substring(0,str.indexOf(','));
+        let j = button.id.charAt(str.indexOf(',')+1);
+        return mines[j][i];
     }
     catch (error) {
         return null;
@@ -143,6 +149,39 @@ function putZeroBefore(numb) {
     return (numb < 10 ? '0' : '') + numb;
 }
 
+var stopCanvas=function()
+{
+    var x=1;
+    var h=setInterval(function(){
+        canvas.style.opacity=x;
+        x-=0.01;
+        if(x<0)
+        {
+            clearInterval(h);
+            clearInterval(confettiMaker);
+            permitted=false;
+            try
+            {
+                buttonContainer.removeChild(canvas);
+                buttonContainer.removeChild(reset);
+                buttonContainer.removeChild(settingsButton);
+                mines.forEach(function (sda) {
+                    sda.forEach(function (e) {
+                        
+                        
+                        buttonContainer.appendChild(e.face);
+                    });
+                });
+                
+                
+                buttonContainer.appendChild(reset);
+                buttonContainer.appendChild(settingsButton);
+            
+            }
+            catch(Error){}
+        }
+    },2);
+}
 
 /**
  *  a function to initialize all variables . the reset button will just call this function
@@ -153,18 +192,13 @@ const initializeGame = function () {
     gameActive = true;
     flagged = 0;
     score = 0;
-    try {
-        buttonContainer.removeChild(canvas);
-    }
-    catch (error) {
-        console.log(error);
-    }
-
-
+    permitted=false;
+    
     mines.forEach(function (sda) {
         sda.forEach(function (e) {
-            e.refresh();
+            
             buttonContainer.appendChild(e.face);
+            e.refresh();
         });
     });
     buttonContainer.appendChild(reset);
@@ -190,6 +224,8 @@ var resetter = function () {
             clearInterval(inst);
         }
         if (Math.abs(x - Math.PI / 2) < 0.1) {
+            try{buttonContainer.removeChild(canvas);}
+            catch(error){}
             
             initializeGame();
         }
@@ -213,13 +249,14 @@ function showWinBox() {
             buttonContainer.removeChild(elem.face);
         });
     });
-
+    
     let i = 0;
     let k = setInterval(function () {
         canvas.style.opacity = i;
         i += 0.01;
         if (i > 1) {
             clearInterval(k);
+            permitted=true;
             window.requestAnimationFrame(painter);
             confettiMaker = setInterval(function () {
 
@@ -234,6 +271,6 @@ function showWinBox() {
                 param += 0.03;
             }, 10);
         }
-    }, 2);
+    }, 4);
 
 }

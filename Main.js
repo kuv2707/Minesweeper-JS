@@ -16,10 +16,10 @@ buttonContainer.style.height = (yLim * 80 + 10) + "px";
 document.body.appendChild(buttonContainer);
 
 //create mine objects
-for (let i = 0; i < xLim; i++) {
+for (let i = 0; i < yLim; i++) {
     let row = new Array();
-    for (let j = 0; j < yLim; j++) {
-        let b = new Mine(new Point(i, j), clickResponse);
+    for (let j = 0; j < xLim; j++) {
+        let b = new Mine(new Point(j,i), clickResponse);
         buttonContainer.appendChild(b.face);
         row.push(b);
     }
@@ -56,6 +56,20 @@ cp.type = "color";
 cp.value = "#156e8e";
 dialog.appendChild(cp);
 
+let bombct=document.createElement("div");
+let lab=document.createElement("label");
+lab.innerHTML="Number of bombs: ";
+let select=document.createElement("select");
+for(let i=5;i<(xLim*yLim-5);i++)
+{
+    let opt=document.createElement("option");
+    opt.innerHTML=i;
+    select.appendChild(opt);
+}
+bombct.appendChild(lab);
+bombct.appendChild(select);
+dialog.appendChild(bombct);
+
 let ret = document.createElement("button");
 ret.innerHTML = "Done";
 ret.id = "return";
@@ -69,6 +83,8 @@ settingsButton.id = "settings";
 
 settingsButton.addEventListener("click", function () {
     dialog.showModal();
+    //start a thread which continuously observes values
+    //of color picker and updates accordingly
 });
 
 ret.addEventListener("click", function () {
@@ -83,6 +99,13 @@ ret.addEventListener("click", function () {
 
         });
     });
+    let bbs=select.value;
+    if(Number(bbs)!=BOMB_COUNT)
+    {
+        BOMB_COUNT=Number(bbs);
+        resetter();
+    }
+    
 });
 
 var canvas = document.createElement("canvas");
@@ -90,5 +113,5 @@ var ctxt = canvas.getContext('2d');
 canvas.width = (xLim * 80);
 canvas.height = (yLim * 80);
 
-canvas.addEventListener("click", resetter);
+canvas.addEventListener("click", stopCanvas);
 initializeGame();

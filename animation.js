@@ -3,6 +3,7 @@ const gravity = 0.15;
 const restitution = 0.8;
 const numAtOnce = 5;
 var showerX, showerY;
+var wincontent;
 class Confetti {
     constructor(id) {
         this.vx = -5 + Math.random() * 10;
@@ -20,9 +21,18 @@ class Confetti {
 
         g.fillStyle = "hsla(" + this.hue + "," + this.saturation + "%," + this.brightness + "%," + this.alpha + "%)";
         //g.fillRect(this.x,this.y,20,20);
-        var path = new Path2D();
-        path.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-        g.fill(path);
+        if(wincontent)
+        {
+            var path = new Path2D();
+            path.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
+            g.fill(path);
+        }
+        else
+        {
+            g.font=20+this.radius+"px arial";
+            g.fillText("👎",this.x,this.y)
+        }
+        
         this.x += this.vx;
         this.y += this.vy;
         this.vy += gravity;
@@ -40,9 +50,10 @@ var x = 0;
 var param = 0;
 var coll = new Array();
 var activeCount = 0;
+var permitted=false;
 var painter = function () {
     ctxt.globalCompositeOperation = "source-over";
-    ctxt.fillStyle = "rgb(0,0,0)";
+    ctxt.fillStyle = cp.value;
     ctxt.fillRect(0, 0, canvas.width, canvas.height);
 
     //draw balls
@@ -51,13 +62,13 @@ var painter = function () {
         v.draw(ctxt);
     });
     //<show a message of whether won or lost...>
-    if (!gameActive)
+    console.log("repainting");
+    if (permitted)
         window.requestAnimationFrame(painter);
     else {
         coll.length = 0;
     }
 }
-
 
 
 
