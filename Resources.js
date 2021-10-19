@@ -238,7 +238,7 @@ var resetter = function () {
 var confettiMaker;
 function showWinBox() {
     canvas.style.opacity = 0;
-    
+    window.requestAnimationFrame(painter);
     buttonContainer.removeChild(reset);
     buttonContainer.removeChild(settingsButton);
     buttonContainer.appendChild(canvas);
@@ -257,7 +257,7 @@ function showWinBox() {
         if (i > 1) {
             clearInterval(k);
             permitted=true;
-            window.requestAnimationFrame(painter);
+            
             confettiMaker = setInterval(function () {
 
                 for (var i = 0; i < numAtOnce; i++) {
