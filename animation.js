@@ -30,7 +30,7 @@ class Confetti {
         else
         {
             g.font=20+this.radius+"px arial";
-            g.fillText("👎",this.x,this.y)
+            g.fillText("💩",this.x,this.y)
         }
         
         this.x += this.vx;
