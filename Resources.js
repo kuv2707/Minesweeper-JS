@@ -6,7 +6,7 @@ const colorArray = ["black", "#11e5f0", "#e6e629", "#ebac7c", "#d97d14", "#eb6b5
 const buttonContainer = document.createElement("div");
 buttonContainer.id = "buttonContainer";
 var zeroState, gameActive, flagged, score = 0;
-var BOMB_COUNT = 15, xLim = 13, yLim = 9, buttonSize = 80;
+var BOMB_COUNT = 15, xLim = 10, yLim = 10, buttonSize = 80;
 /**
  * DDA containing all the Mine objects at index corresponding to their position
  * its x and y indexes are reversed as it was causing problems with alignment of buttons 
