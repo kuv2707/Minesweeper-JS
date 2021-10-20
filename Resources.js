@@ -256,7 +256,7 @@ function showWinBox() {
         i += 0.01;
         if (i > 1) {
             clearInterval(k);
-            reset.innerHTML="Flush";
+            reset.innerHTML="Flush🧻";
             permitted=true;
             window.requestAnimationFrame(painter);
             confettiMaker = setInterval(function () {
