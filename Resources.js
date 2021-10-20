@@ -283,6 +283,7 @@ function changeTheme(newcol)
     return;
     defCol=newcol;
     ret.style.background = "linear-gradient(150deg,#FFFFFF," + newcol + ",#000000)";
+    dialog.style.background = "linear-gradient(150deg,#fff,"+newcol+")";
     document.querySelector('meta[name="theme-color"]').setAttribute('content', newcol);
     mines.forEach(function (mine) {
         mine.forEach(function (min) {
