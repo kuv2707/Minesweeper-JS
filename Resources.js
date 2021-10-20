@@ -274,3 +274,18 @@ function showWinBox() {
     }, 4);
 
 }
+function changeTheme(newcol)
+{
+    if(defCol==newcol)
+    return;
+    defCol=newcol;
+    ret.style.background = "linear-gradient(150deg,#FFFFFF," + newcol + ",#000000)";
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', newcol);
+    mines.forEach(function (mine) {
+        mine.forEach(function (min) {
+            min.setNewColorAs(newcol);
+
+        });
+    });
+    
+}

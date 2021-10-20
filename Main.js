@@ -74,6 +74,7 @@ dialog.appendChild(bombct);
 
 let ret = document.createElement("button");
 ret.innerHTML = "Done";
+ret.style.color="White";
 ret.id = "return";
 ret.style.background = "linear-gradient(150deg,#FFFFFF,#156e8e,#000000)";
 dialog.appendChild(ret);
@@ -82,25 +83,21 @@ buttonContainer.appendChild(dialog);
 var settingsButton = document.createElement("button");
 settingsButton.innerHTML = "Settings";
 settingsButton.id = "settings";
-
+var themeSync;
 settingsButton.addEventListener("click", function () {
     dialog.showModal();
     //start a thread which continuously observes values
     //of color picker and updates accordingly
+    themeSync=setInterval(function()
+    {
+        changeTheme(cp.value);
+    },3);
+    
 });
-
 ret.addEventListener("click", function () {
     dialog.close();
-    let newcol = cp.value;
-    console.log(newcol);
-    ret.style.background = "linear-gradient(150deg,#FFFFFF," + newcol + ",#000000)";
-    document.querySelector('meta[name="theme-color"]').setAttribute('content', newcol);
-    mines.forEach(function (mine) {
-        mine.forEach(function (min) {
-            min.setNewColorAs(newcol);
-
-        });
-    });
+    
+    clearInterval(themeSync);
     let bbs=select.value;
     if(Number(bbs)!=BOMB_COUNT)
     {

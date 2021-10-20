@@ -60,7 +60,7 @@ class Mine
             this.mainAppearance="linear-gradient(150deg,#FFFFFF,"+newcol+")";
             this.face.style.background=this.mainAppearance;
         }
-        defCol=newcol;
+        
     }
     setTextOnReveal(text)
     {

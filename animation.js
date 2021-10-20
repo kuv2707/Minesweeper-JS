@@ -37,10 +37,11 @@ class Confetti {
         this.y += this.vy;
         this.vy += gravity;
 
-        if (this.y > canvas.height || this.x < 0 || this.x > canvas.width) {
+        if (this.y > canvas.height+60 || this.x < -50 || this.x > canvas.width+60) {
             //delete coll[this.id];
             //coll.shift();
             coll.splice(this, 1);
+            console.log(coll.length);
 
 
         }
