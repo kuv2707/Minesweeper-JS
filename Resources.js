@@ -237,7 +237,7 @@ var resetter = function () {
 }
 var confettiMaker;
 function showWinBox() {
-    canvas.style.opacity = 0;
+    canvas.style.opacity = 0.01;
     
     buttonContainer.removeChild(reset);
     buttonContainer.removeChild(settingsButton);
@@ -249,15 +249,15 @@ function showWinBox() {
             buttonContainer.removeChild(elem.face);
         });
     });
-    window.requestAnimationFrame(painter);
-    let i = 0;
+    
+    let i = 0.01;
     let k = setInterval(function () {
         canvas.style.opacity = i;
         i += 0.01;
         if (i > 1) {
             clearInterval(k);
             permitted=true;
-            
+            window.requestAnimationFrame(painter);
             confettiMaker = setInterval(function () {
 
                 for (var i = 0; i < numAtOnce; i++) {

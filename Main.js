@@ -64,6 +64,8 @@ for(let i=5;i<(xLim*yLim-5);i++)
 {
     let opt=document.createElement("option");
     opt.innerHTML=i;
+    if(i==BOMB_COUNT)
+    opt.selected=true;
     select.appendChild(opt);
 }
 bombct.appendChild(lab);
