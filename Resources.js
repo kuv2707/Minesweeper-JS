@@ -193,7 +193,7 @@ const initializeGame = function () {
     flagged = 0;
     score = 0;
     permitted=false;
-    
+    reset.innerHTML="Reset";
     mines.forEach(function (sda) {
         sda.forEach(function (e) {
             
@@ -256,6 +256,7 @@ function showWinBox() {
         i += 0.01;
         if (i > 1) {
             clearInterval(k);
+            reset.innerHTML="Flush";
             permitted=true;
             window.requestAnimationFrame(painter);
             confettiMaker = setInterval(function () {
