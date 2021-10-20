@@ -14,7 +14,12 @@ class Confetti {
         this.hue = Math.random() * 360;
         this.saturation = Math.random() * 100;
         this.brightness = 50 + Math.random() * 50;
-        this.alpha = 50 + Math.random() * 50;
+
+        this.alpha = 100;
+        if(wincontent)
+        {
+            this.alpha+=-50 + Math.random() * 50;
+        }
         this.radius = 15;
     }
     draw = function (g) {
