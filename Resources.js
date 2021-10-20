@@ -152,6 +152,7 @@ function putZeroBefore(numb) {
 var stopCanvas=function()
 {
     var x=1;
+    reset.innerHTML="Reset";
     var h=setInterval(function(){
         canvas.style.opacity=x;
         x-=0.01;
