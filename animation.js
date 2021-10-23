@@ -20,7 +20,7 @@ class Confetti {
         {
             this.alpha+=-50 + Math.random() * 50;
         }
-        this.radius = 15;
+        this.radius = Math.random()*55+10;
     }
     draw = function (g) {
 
@@ -28,13 +28,15 @@ class Confetti {
         //g.fillRect(this.x,this.y,20,20);
         if(wincontent)
         {
-            var path = new Path2D();
-            path.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-            g.fill(path);
+            //var path = new Path2D();
+            //path.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
+            //g.fill(path);
+            g.font=Math.trunc(this.radius)+"px arial";
+            g.fillText("🎇",this.x,this.y)
         }
         else
         {
-            g.font=20+this.radius+"px arial";
+            g.font=Math.trunc(this.radius)+"px arial";
             g.fillText("💩",this.x,this.y)
         }
         

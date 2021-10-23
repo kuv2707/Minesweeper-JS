@@ -258,6 +258,7 @@ function showWinBox() {
         i += 0.01;
         if (i > 1) {
             clearInterval(k);
+            if(wincontent==false)
             reset.innerHTML="Flush🧻";
             permitted=true;
             window.requestAnimationFrame(painter);
