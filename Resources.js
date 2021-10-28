@@ -265,15 +265,11 @@ function showWinBox() {
             confettiMaker = setInterval(function () {
 
                 for (var i = 0; i < numAtOnce; i++) {
-                    coll.push(new Confetti(x++));
+                    coll.push(new FlyingEmojis(x++));
                     activeCount++;
                 }
-
-                //showerX=canvas.width/2+(canvas.width/3)*Math.sin(param);
-                showerX = canvas.width / 2;
-                showerY = 190;
                 param += 0.03;
-            }, 10);
+            }, 20);
         }
     }, 4);
 

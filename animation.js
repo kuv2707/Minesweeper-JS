@@ -2,9 +2,9 @@
 const gravity = 0.15;
 const restitution = 0.8;
 const numAtOnce = 5;
-var showerX, showerY;
+var showerX=canvas.width/2, showerY=190;
 var wincontent;
-class Confetti {
+class FlyingEmojis {
     constructor(id) {
         this.vx = -5 + Math.random() * 10;
         this.vy = -8 + Math.random() * 10;
@@ -28,9 +28,6 @@ class Confetti {
         //g.fillRect(this.x,this.y,20,20);
         if(wincontent)
         {
-            //var path = new Path2D();
-            //path.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
-            //g.fill(path);
             g.font=Math.trunc(this.radius)+"px arial";
             g.fillText("🎇",this.x,this.y)
         }
