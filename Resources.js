@@ -69,7 +69,7 @@ function increaseScore() {
     if (score == (xLim * yLim) - BOMB_COUNT)
         fireGameEnd(true);
 }
-function getMineAt(y,x) {
+function getMineAt(y, x) {
     if (isOutOfBounds(x, y)) {
         return null;
     }
@@ -82,7 +82,7 @@ function putBombsIn(minesArray, except) {
     while (c < BOMB_COUNT) {
         j = Number(Math.round(Math.random() * (xLim - 1)));
         i = Number(Math.round(Math.random() * (yLim - 1)));
-        console.log(i,j);
+        console.log(i, j);
         if (minesArray[i][j] === except)
             continue;
         if (minesArray[i][j].getHasBomb == false) {
@@ -101,12 +101,12 @@ const fireGameEnd = function (boolResult) {
     if (boolResult) {
         scoreStatus.innerHTML = "🎆You WON!🎆";
         scoreStatus.style.color = "rgb(15, 92, 50)";
-        wincontent=true;
+        wincontent = true;
     }
     else {
         scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
         scoreStatus.style.color = "rgb(143, 9, 47)";
-        wincontent=false;
+        wincontent = false;
     }
     gameActive = false;
     clearInterval(timerID);
@@ -119,9 +119,9 @@ const fireGameEnd = function (boolResult) {
 
 const getMineOfButton = function (button) {
     try {
-        var str=button.id;
-        let i = str.substring(0,str.indexOf(','));
-        let j = button.id.charAt(str.indexOf(',')+1);
+        var str = button.id;
+        let i = str.substring(0, str.indexOf(','));
+        let j = button.id.charAt(str.indexOf(',') + 1);
         return mines[j][i];
     }
     catch (error) {
@@ -149,40 +149,37 @@ function putZeroBefore(numb) {
     return (numb < 10 ? '0' : '') + numb;
 }
 
-var stopCanvas=function()
-{
-    var x=1;
-    
-    var h=setInterval(function(){
-        canvas.style.opacity=x;
-        x-=0.01;
-        if(x<0)
-        {
+var stopCanvas = function () {
+    var x = 1;
+
+    var h = setInterval(function () {
+        canvas.style.opacity = x;
+        x -= 0.01;
+        if (x < 0) {
             clearInterval(h);
             clearInterval(confettiMaker);
-            reset.innerHTML="Reset";
-            permitted=false;
-            try
-            {
+            reset.innerHTML = "Reset";
+            permitted = false;
+            try {
                 buttonContainer.removeChild(canvas);
                 buttonContainer.removeChild(reset);
                 buttonContainer.removeChild(settingsButton);
                 mines.forEach(function (sda) {
                     sda.forEach(function (e) {
-                        
-                        
+
+
                         buttonContainer.appendChild(e.face);
                     });
                 });
-                
-                
+
+
                 buttonContainer.appendChild(reset);
                 buttonContainer.appendChild(settingsButton);
-            
+
             }
-            catch(Error){}
+            catch (Error) { }
         }
-    },2);
+    }, 2);
 }
 
 /**
@@ -194,11 +191,11 @@ const initializeGame = function () {
     gameActive = true;
     flagged = 0;
     score = 0;
-    permitted=false;
-    reset.innerHTML="Reset";
+    permitted = false;
+    reset.innerHTML = "Reset";
     mines.forEach(function (sda) {
         sda.forEach(function (e) {
-            
+
             buttonContainer.appendChild(e.face);
             e.refresh();
         });
@@ -216,8 +213,8 @@ var resetter = function () {
     let x = 0;
     clearInterval(inst);
     clearInterval(confettiMaker);
-    
-    
+
+
     inst = setInterval(function () {
         buttonContainer.style.opacity = Math.pow(Math.cos(x), 2);
         x += Math.PI / 100;
@@ -226,9 +223,9 @@ var resetter = function () {
             clearInterval(inst);
         }
         if (Math.abs(x - Math.PI / 2) < 0.1) {
-            try{buttonContainer.removeChild(canvas);}
-            catch(error){}
-            
+            try { buttonContainer.removeChild(canvas); }
+            catch (error) { }
+
             initializeGame();
         }
 
@@ -240,7 +237,7 @@ var resetter = function () {
 var confettiMaker;
 function showWinBox() {
     canvas.style.opacity = 0.01;
-    
+
     buttonContainer.removeChild(reset);
     buttonContainer.removeChild(settingsButton);
     buttonContainer.appendChild(canvas);
@@ -251,16 +248,16 @@ function showWinBox() {
             buttonContainer.removeChild(elem.face);
         });
     });
-    
+
     let i = 0.01;
     let k = setInterval(function () {
         canvas.style.opacity = i;
         i += 0.01;
         if (i > 1) {
             clearInterval(k);
-            if(wincontent==false)
-            reset.innerHTML="Flush🧻";
-            permitted=true;
+            if (wincontent == false)
+                reset.innerHTML = "Flush🧻";
+            permitted = true;
             window.requestAnimationFrame(painter);
             confettiMaker = setInterval(function () {
 
@@ -274,19 +271,16 @@ function showWinBox() {
     }, 4);
 
 }
-function changeTheme(newcol)
-{
-    if(defCol==newcol)
-    return;
-    defCol=newcol;
+function changeTheme(newcol) {
+    if (defCol == newcol)
+        return;
+    defCol = newcol;
     ret.style.background = "linear-gradient(150deg,#FFFFFF," + newcol + ",#000000)";
-    dialog.style.background = "linear-gradient(150deg,#fff,"+newcol+")";
+    dialog.style.background = "linear-gradient(150deg,#fff," + newcol + ")";
     document.querySelector('meta[name="theme-color"]').setAttribute('content', newcol);
     mines.forEach(function (mine) {
         mine.forEach(function (min) {
             min.setNewColorAs(newcol);
-
         });
     });
-    
 }

@@ -26,14 +26,13 @@ class FlyingEmojis {
 
         g.fillStyle = "hsla(" + this.hue + "," + this.saturation + "%," + this.brightness + "%," + this.alpha + "%)";
         //g.fillRect(this.x,this.y,20,20);
+        g.font=Math.trunc(this.radius)+"px arial";
         if(wincontent)
         {
-            g.font=Math.trunc(this.radius)+"px arial";
             g.fillText("🎇",this.x,this.y)
         }
         else
         {
-            g.font=Math.trunc(this.radius)+"px arial";
             g.fillText("💩",this.x,this.y)
         }
         

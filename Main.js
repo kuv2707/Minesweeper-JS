@@ -1,6 +1,6 @@
 //driver code
 
-var scoreStatus = document.createElement("h2");
+var scoreStatus = document.createElement("h1");
 var timer = document.createElement("h4");
 var reset = document.createElement("button");
 scoreStatus.id = "scoreStatus";

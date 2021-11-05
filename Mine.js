@@ -7,7 +7,7 @@ var menter=function()
     if(getMineOfButton(this).revealed==false)
     {
         
-        this.style.background="linear-gradient(150deg,#FFFFFF,#D6EAF8,#000000)";
+        this.style.background="linear-gradient(150deg,#FFFFFF,"+defCol+",#000000)";
         this.style.boxShadow="0px 0px 60px" + " rgb(154, 73, 228)";
 
     }
@@ -85,9 +85,9 @@ class Mine
         }
         this.face.innerHTML=this.textOnReveal;
         if(this.getHasBomb)
-        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#750a05)";
+        this.mainAppearance="linear-gradient(150deg,#111111,#750a05)";
         else
-        this.mainAppearance="linear-gradient(150deg,#FFFFFF,#067022)";
+        this.mainAppearance="linear-gradient(150deg,#555,#067022)";
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();
