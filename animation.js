@@ -56,8 +56,8 @@ var coll = new Array();
 var activeCount = 0;
 var permitted=false;
 var painter = function () {
-    if(wincontent)
-    ctxt.globalCompositeOperation = "source-over";
+    //if(wincontent)
+    //ctxt.globalCompositeOperation = "source-over";
     ctxt.fillStyle = cp.value;
     ctxt.fillRect(0, 0, canvas.width, canvas.height);
 
