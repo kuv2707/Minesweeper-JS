@@ -1,5 +1,5 @@
 const FLAG = "🚩", BOMB = "💣", EMPTYSPACE = "&nbsp", DOUBT = "❓";
-var defCol = "#156e8e";
+var defCol = "#EFB9B9";
 const colorArray = ["black", "#11e5f0", "#e6e629", "#ebac7c", "#d97d14", "#eb6b57", "#e0420d", "#ed1515", "#960e0e"];
 
 
@@ -111,8 +111,7 @@ const fireGameEnd = function (boolResult) {
     gameActive = false;
     clearInterval(timerID);
 
-    //add this inside if statement
-
+    
     showWinBox();
 }
 

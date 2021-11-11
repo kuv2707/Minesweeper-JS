@@ -33,9 +33,9 @@ var x = 0;
 var grad = setInterval(function () {
     if (gameActive == false)
         clearInterval(grad);
-    let red = 93;
+    let blue = 93;
     let green = 170;
-    let blue = Math.sin(x) * 100 + 127;
+    let red = Math.sin(x) * 100 + 127;
     x += 0.05;
     let color = "rgb(" + red + ',' + green + ',' + blue + ')';
     var bodyStyle = document.querySelector("body").style;
@@ -53,7 +53,7 @@ dialog.appendChild(lab1);
 
 let cp = document.createElement("input");
 cp.type = "color";
-cp.value = "#156e8e";
+cp.value = defCol;
 dialog.appendChild(cp);
 
 let bombct=document.createElement("div");
