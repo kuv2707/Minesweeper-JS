@@ -98,23 +98,37 @@ function putBombsIn(minesArray, except) {
 }
 
 const fireGameEnd = function (boolResult) {
-    if (boolResult) {
+    if (!boolResult) {
         scoreStatus.innerHTML = "🎆You WON!🎆";
-        scoreStatus.style.color = "rgb(15, 92, 50)";
+        scoreStatus.style.color = "#1bbfb7";
         wincontent = true;
     }
     else {
         scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
-        scoreStatus.style.color = "rgb(143, 9, 47)";
+        scoreStatus.style.color = "#ad1a1a";
         wincontent = false;
     }
     gameActive = false;
     clearInterval(timerID);
-
+    getOffset(canvas);
     
     showWinBox();
 }
-
+/**
+ * To get absolute position of an element
+ * @param {*} elem 
+ * @returns 
+ */
+const getOffset=function(elem)
+    {
+        const r=elem.getBoundingClientRect();
+        //console.log(r);
+        //console.log(window.scrollX,window.scrollY);
+        return{
+            x: r.left+window.scrollX,
+            y: r.top+window.scrollY
+        };
+    }
 
 const getMineOfButton = function (button) {
     try {
@@ -265,7 +279,7 @@ function showWinBox() {
                     activeCount++;
                 }
                 param += 0.03;
-            }, 20);
+            }, emojiSpawnInterval);
         }
     }, 4);
 

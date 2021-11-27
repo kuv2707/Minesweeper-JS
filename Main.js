@@ -72,6 +72,12 @@ bombct.appendChild(lab);
 bombct.appendChild(select);
 dialog.appendChild(bombct);
 
+let instr=document.createElement("a");
+instr.href="google.com";
+
+instr.innerHTML="How to play?";
+dialog.appendChild(instr);
+
 let ret = document.createElement("button");
 ret.innerHTML = "Done";
 ret.style.color="White";
@@ -112,5 +118,9 @@ var ctxt = canvas.getContext('2d');
 canvas.width = (xLim * 80);
 canvas.height = (yLim * 80);
 
-canvas.addEventListener("click", stopCanvas);
+//canvas.addEventListener("click", stopCanvas);
+canvas.addEventListener("click", function(e)
+{
+    console.log(e.clientY-getOffset(canvas).y);
+});
 initializeGame();

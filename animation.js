@@ -2,38 +2,52 @@
 const gravity = 0.15;
 const restitution = 0.8;
 const numAtOnce = 5;
-var showerX=canvas.width/2, showerY=190;
+const emojiSpawnInterval=20;
+var showerX=canvas.width/2, showerY=canvas.height/2;
 var wincontent;
-var food=["🍕","🍔","🧀","🍳"];
+var food=["🍕","🍔","🧀","🍗"];
+var insult=["🖕","💩"];
 class FlyingEmojis {
-    constructor(id) {
+    constructor() {
         this.vx = -5 + Math.random() * 10;
-        this.vy = -8 + Math.random() * 10;
+        this.vy = -5 + Math.random() * 10;
         this.x = showerX;
         this.y = showerY;
-        this.id = id;
         this.hue = Math.random() * 360;
         this.saturation = Math.random() * 100;
         this.brightness = 50 + Math.random() * 50;        
         this.textSize = Math.random()*55+10;
+        this.life=300;
         if(wincontent)
         this.content=food[parseInt(Math.random()*food.length)];
         else
-        this.content="💩";
+        this.content=insult[parseInt(Math.random()*insult.length)];;
     }
+    
     draw = function (g) {
 
-        g.fillStyle = "hsla(" + this.hue + "," + this.saturation + "%," + this.brightness + "%," + this.alpha + "%)";
+        //g.fillStyle = "hsla(" + this.hue + "," + this.saturation + "%," + this.brightness + "%," + this.alpha + "%)";
+        g.fillStyle="black";
         g.font=Math.trunc(this.textSize)+"px arial";
         g.fillText(this.content,this.x,this.y)
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += gravity;
-        if (this.y > canvas.height+60 || this.x < -50 || this.x > canvas.width+60) {
+        
+        let x=this.x;
+        let y=this.y;
+        
+        if(x<-this.textSize||   x>canvas.width  ||  y<-this.textSize  ||  y>canvas.height)
+        {
+            coll.splice(this,1);
             
-            coll.splice(this, 1);
-            //console.log(coll.length);
         }
+        
+
+        
+        /* for gravity
+        if(!wincontent)
+        this.vy += gravity;
+        */
     }
 }
 var x = 0;
@@ -50,7 +64,7 @@ var painter = function () {
         v.draw(ctxt);
     });
     //<show a message of whether won or lost...>
-    console.log("repainting");
+    //console.log("repainting");
     if (permitted)
         window.requestAnimationFrame(painter);
     else {

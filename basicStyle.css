@@ -8,6 +8,10 @@
     margin:auto;
     overflow: hidden;
 }
+:root
+{
+    -thing:#0a1255;
+}
 *::selection
 {
     background-color: #222222;
@@ -138,7 +142,7 @@ h6
     width:200px;
     height:90px;
     border:none;
-    border-radius:20px;
+    border-radius:30px;
     color:black;
 }
 #return:hover
@@ -161,4 +165,8 @@ dialog
     width:640px;
     height:540px;
     overflow:hidden;
+}
+a{
+    padding-right:200px;
+    text-align: center;
 }
