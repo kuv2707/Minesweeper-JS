@@ -98,7 +98,7 @@ function putBombsIn(minesArray, except) {
 }
 
 const fireGameEnd = function (boolResult) {
-    if (!boolResult) {
+    if (boolResult) {
         scoreStatus.innerHTML = "🎆You WON!🎆";
         scoreStatus.style.color = "#1bbfb7";
         wincontent = true;
