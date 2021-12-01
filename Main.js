@@ -118,9 +118,9 @@ var ctxt = canvas.getContext('2d');
 canvas.width = (xLim * 80);
 canvas.height = (yLim * 80);
 
-//canvas.addEventListener("click", stopCanvas);
+canvas.addEventListener("click", stopCanvas);
 canvas.addEventListener("click", function(e)
 {
-    console.log(e.clientY-getOffset(canvas).y);
+    //console.log(e.clientY-getOffset(canvas).y);
 });
 initializeGame();
