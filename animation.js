@@ -1,7 +1,7 @@
 
 const gravity = 0.15;
 const restitution = 0.8;
-const numAtOnce = 5;
+var numAtOnce = 5;
 const emojiSpawnInterval=20;
 var showerX=canvas.width/2, showerY=canvas.height/2;
 var wincontent;
