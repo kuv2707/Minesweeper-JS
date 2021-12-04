@@ -82,7 +82,7 @@ function putBombsIn(minesArray, except) {
     while (c < BOMB_COUNT) {
         j = Number(Math.round(Math.random() * (xLim - 1)));
         i = Number(Math.round(Math.random() * (yLim - 1)));
-        console.log(i, j);
+        //console.log(i, j);
         if (minesArray[i][j] === except)
             continue;
         if (minesArray[i][j].getHasBomb == false) {
@@ -104,8 +104,8 @@ const fireGameEnd = function (boolResult) {
         wincontent = true;
     }
     else {
-        scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
         scoreStatus.style.color = "#ad1a1a";
+        scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
         wincontent = false;
     }
     gameActive = false;
@@ -275,8 +275,11 @@ function showWinBox() {
             confettiMaker = setInterval(function () {
 
                 for (var i = 0; i < numAtOnce; i++) {
+                    
+                    if(coll.length>720)
+                    break;
                     coll.push(new FlyingEmojis(x++));
-                    activeCount++;
+                    //activeCount++;
                 }
                 param += 0.03;
             }, emojiSpawnInterval);

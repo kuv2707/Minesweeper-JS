@@ -9,36 +9,43 @@ var food=["🍕","🍔","🧀","🍗"];
 var insult=["🖕","💩"];
 class FlyingEmojis {
     constructor() {
-        this.vx = -5 + Math.random() * 10;
-        this.vy = -5 + Math.random() * 10;
+        this.make();
+    }
+    make=function()
+    {
+        this.velocity = 3+ Math.random() * 4;
+        this.angle = Math.random() * 2*Math.PI;
+        this.velocityX=this.velocity*Math.cos(this.angle);
+        this.velocityY=this.velocity*Math.sin(this.angle);
         this.x = showerX;
         this.y = showerY;
-        this.hue = Math.random() * 360;
-        this.saturation = Math.random() * 100;
-        this.brightness = 50 + Math.random() * 50;        
+        //this.hue = Math.random() * 360;
+        //this.saturation = Math.random() * 100;
+        //this.brightness = 50 + Math.random() * 50;        
         this.textSize = Math.random()*55+10;
-        this.life=300;
         if(wincontent)
         this.content=food[parseInt(Math.random()*food.length)];
         else
-        this.content=insult[parseInt(Math.random()*insult.length)];;
+        this.content=insult[parseInt(Math.random()*insult.length)];
+
     }
-    
     draw = function (g) {
 
         //g.fillStyle = "hsla(" + this.hue + "," + this.saturation + "%," + this.brightness + "%," + this.alpha + "%)";
         g.fillStyle="black";
         g.font=Math.trunc(this.textSize)+"px arial";
         g.fillText(this.content,this.x,this.y)
-        this.x += this.vx;
-        this.y += this.vy;
+        this.x += this.velocityX;
+        this.y += this.velocityY;
         
         let x=this.x;
         let y=this.y;
         
-        if(x<-this.textSize||   x>canvas.width  ||  y<-this.textSize  ||  y>canvas.height)
+        if(x<-this.textSize||   x>canvas.width  ||  y<0  ||  y>canvas.height+this.textSize)
         {
-            coll.splice(this,1);
+            //coll.splice(this,1);
+            this.make();
+            
             
         }
         
