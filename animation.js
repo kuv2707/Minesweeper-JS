@@ -19,9 +19,7 @@ class FlyingEmojis {
         this.velocityY=this.velocity*Math.sin(this.angle);
         this.x = showerX;
         this.y = showerY;
-        //this.hue = Math.random() * 360;
-        //this.saturation = Math.random() * 100;
-        //this.brightness = 50 + Math.random() * 50;        
+        this.markForRemoval=false;        
         this.textSize = Math.random()*55+10;
         if(wincontent)
         this.content=food[parseInt(Math.random()*food.length)];
@@ -43,8 +41,8 @@ class FlyingEmojis {
         
         if(x<-this.textSize||   x>canvas.width  ||  y<0  ||  y>canvas.height+this.textSize)
         {
-            //coll.splice(this,1);
-            this.make();
+            this.markForRemoval=true;
+            
             
             
         }
@@ -65,19 +63,43 @@ var permitted=false;
 var painter = function () {
     ctxt.fillStyle = cp.value;
     ctxt.fillRect(0, 0, canvas.width, canvas.height);
-
     //draw balls
     coll.forEach(function (v) {
+        if(!v.markForRemoval)
         v.draw(ctxt);
     });
-    //<show a message of whether won or lost...>
-    //console.log("repainting");
+    
     if (permitted)
         window.requestAnimationFrame(painter);
     else {
         coll.length = 0;
     }
 }
+var start=function()
+{
+    confettiMaker = setInterval(function ()
+            {
 
+                for (var i = 0; i < numAtOnce; i++) {
+                    
+                    //if(coll.length>720)
+                    //break;
+                    coll.push(new FlyingEmojis(x++));
+                    //activeCount++;
+                }
+                
+                param += 0.03;
+            }, emojiSpawnInterval);
+            confettiManager=setInterval(function()
+            {
+                var k=0;
+                while(k<coll.length)
+                {
+                    if(coll[k].markForRemoval)
+                    coll.splice(coll[k],1);
+                    k++;
+                }
+            },2000);
+}
 
 

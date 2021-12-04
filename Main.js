@@ -39,6 +39,7 @@ var grad = setInterval(function () {
     x += 0.05;
     let color = "rgb(" + red + ',' + green + ',' + blue + ')';
     var bodyStyle = document.querySelector("body").style;
+    
     bodyStyle.background = "linear-gradient(140deg,#FFFFFF," + color + ")";
     bodyStyle.backgroundRepeat = "no-repeat";
     bodyStyle.backgroundAttachment = "fixed";

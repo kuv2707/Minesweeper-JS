@@ -226,7 +226,7 @@ var resetter = function () {
     let x = 0;
     clearInterval(inst);
     clearInterval(confettiMaker);
-
+    clearInterval(confettiManager);
 
     inst = setInterval(function () {
         buttonContainer.style.opacity = Math.pow(Math.cos(x), 2);
@@ -248,14 +248,12 @@ var resetter = function () {
 
 }
 var confettiMaker;
+var confettiManager;
 function showWinBox() {
     canvas.style.opacity = 0.01;
 
-    buttonContainer.removeChild(reset);
-    buttonContainer.removeChild(settingsButton);
-    buttonContainer.appendChild(canvas);
-    buttonContainer.appendChild(reset);
-    buttonContainer.appendChild(settingsButton);
+    
+    $(canvas).insertBefore(reset);
     mines.forEach(sda => {
         sda.forEach(elem => {
             buttonContainer.removeChild(elem.face);
@@ -266,23 +264,14 @@ function showWinBox() {
     let k = setInterval(function () {
         canvas.style.opacity = i;
         i += 0.01;
-        if (i > 1) {
+        if (i > 1)
+        {
             clearInterval(k);
             if (wincontent == false)
                 reset.innerHTML = "Flush🧻";
             permitted = true;
             window.requestAnimationFrame(painter);
-            confettiMaker = setInterval(function () {
-
-                for (var i = 0; i < numAtOnce; i++) {
-                    
-                    if(coll.length>720)
-                    break;
-                    coll.push(new FlyingEmojis(x++));
-                    //activeCount++;
-                }
-                param += 0.03;
-            }, emojiSpawnInterval);
+            start();
         }
     }, 4);
 
