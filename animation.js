@@ -6,7 +6,7 @@ const emojiSpawnInterval=20;
 var showerX=canvas.width/2, showerY=canvas.height/2;
 var wincontent;
 var food=["🍕","🍔","🧀","🍗"];
-var insult=["🖕","💩"];
+var insult=["🖕","💩","duck!"];
 class FlyingEmojis {
     constructor() {
         this.make();
@@ -19,7 +19,7 @@ class FlyingEmojis {
         this.velocityY=this.velocity*Math.sin(this.angle);
         this.x = showerX;
         this.y = showerY;
-        this.zDirection=Math.random()-0.5;
+        //this.zDirection=Math.random()-0.5;
         this.markForRemoval=false;        
         this.textSize = Math.random()*55+10;
         if(wincontent)
@@ -36,8 +36,8 @@ class FlyingEmojis {
         g.fillText(this.content,this.x,this.y)
         this.x += this.velocityX;
         this.y += this.velocityY;
-        if(this.textSize>0.4)
-        this.textSize+=this.zDirection;
+        //if(this.textSize>0.4)
+        //this.textSize+=this.zDirection;
         let x=this.x;
         let y=this.y;
         
