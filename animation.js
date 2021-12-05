@@ -54,7 +54,7 @@ class FlyingEmojis {
         */
     }
 }
-var x = 0;
+
 var param = 0;
 var coll = new Array();
 var activeCount = 0;
@@ -83,7 +83,7 @@ var start=function()
                     
                     //if(coll.length>720)
                     //break;
-                    coll.push(new FlyingEmojis(x++));
+                    coll.push(new FlyingEmojis());
                     //activeCount++;
                 }
                 
@@ -98,7 +98,7 @@ var start=function()
                     coll.splice(coll[k],1);
                     k++;
                 }
-            },2000);
+            },2500);
 }
 
 
