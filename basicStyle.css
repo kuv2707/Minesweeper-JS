@@ -64,6 +64,8 @@ body
 {
     margin:auto;
     width:50%;
+    
+    
 }
 #scoreStatus
 {
@@ -71,6 +73,7 @@ body
     text-align: center;
     text-shadow:16px 20px 12px #351313;
     animation:textIn ease 8s;
+    
 }
 h4
 {
@@ -78,6 +81,7 @@ h4
     text-align: center;
     text-shadow:16px 20px 12px #665a5a;
     animation:textIn ease 8s;
+    filter:drop-shadow(30px 30px 50px #222222);
 }
 #reset
 {
@@ -155,6 +159,7 @@ canvas
     padding:0px;
     border-radius: 30px;
     margin:auto;
+    filter:drop-shadow(40px 40px 20px #333333);
 }
 dialog
 {

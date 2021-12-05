@@ -5,6 +5,7 @@ const colorArray = ["black", "#11e5f0", "#e6e629", "#ebac7c", "#d97d14", "#eb6b5
 
 const buttonContainer = document.createElement("div");
 buttonContainer.id = "buttonContainer";
+
 var zeroState, gameActive, flagged, score = 0;
 var BOMB_COUNT = 15, xLim = 10, yLim = 10, buttonSize = 80;
 /**
@@ -173,28 +174,63 @@ var stopCanvas = function () {
             clearInterval(confettiMaker);
             reset.innerHTML = "Reset";
             permitted = false;
-            try {
+            
+                
                 buttonContainer.removeChild(canvas);
-                buttonContainer.removeChild(reset);
-                buttonContainer.removeChild(settingsButton);
-                mines.forEach(function (sda) {
-                    sda.forEach(function (e) {
-
-
-                        buttonContainer.appendChild(e.face);
-                    });
-                });
-
-
-                buttonContainer.appendChild(reset);
-                buttonContainer.appendChild(settingsButton);
-
-            }
-            catch (Error) { }
+                for(let i=0;i<mines.length;i++)
+                {
+                    for(let j=0;j<mines[i].length;j++)
+                    {
+                        $(mines[i][j].face).insertBefore(reset);
+                        mines[i][j].face.style.opacity=0;
+                    }
+                }
+                fadeInButtons();
+            
         }
     }, 2);
 }
-
+const fadeInButtons=function()
+{
+    let k=0;
+    let trans=setInterval(function()
+            {
+                for(let i=0;i<mines.length;i++)
+                {
+                    for(let j=0;j<mines[i].length;j++)
+                    {
+                        
+                        mines[i][j].face.style.opacity=k;
+                    }
+                }
+                k+=0.01;
+                if(k>=1)
+                clearInterval(trans); 
+                
+            },4);
+}
+const fadeOutButtons=function(onFadeOut)
+{
+    let k=1;
+    let trans=setInterval(function()
+            {
+                for(let i=0;i<mines.length;i++)
+                {
+                    for(let j=0;j<mines[i].length;j++)
+                    {
+                        
+                        mines[i][j].face.style.opacity=k;
+                    }
+                }
+                k-=0.01;
+                if(k<=0)
+                {
+                    clearInterval(trans); 
+                    onFadeOut();
+                }
+                
+            },4);
+}
 /**
  *  a function to initialize all variables . the reset button will just call this function
  * so that reloading  the page is not needed to restart game
@@ -213,6 +249,7 @@ const initializeGame = function () {
             e.refresh();
         });
     });
+    fadeInButtons();
     buttonContainer.appendChild(reset);
     buttonContainer.appendChild(settingsButton);
     seconds = 0, minutes = 0, hours = 0;
@@ -238,7 +275,7 @@ var resetter = function () {
         if (Math.abs(x - Math.PI / 2) < 0.1) {
             try { buttonContainer.removeChild(canvas); }
             catch (error) { }
-
+            
             initializeGame();
         }
 
@@ -252,28 +289,31 @@ var confettiManager;
 function showWinBox() {
     canvas.style.opacity = 0.01;
 
-    
-    $(canvas).insertBefore(reset);
-    mines.forEach(sda => {
-        sda.forEach(elem => {
-            buttonContainer.removeChild(elem.face);
+    fadeOutButtons(function()
+    {
+        $(canvas).insertBefore(reset);
+        mines.forEach(sda => {
+            sda.forEach(elem => {
+                buttonContainer.removeChild(elem.face);
+            });
         });
-    });
 
-    let i = 0.01;
-    let k = setInterval(function () {
-        canvas.style.opacity = i;
-        i += 0.01;
-        if (i > 1)
-        {
-            clearInterval(k);
-            if (wincontent == false)
-                reset.innerHTML = "Flush🧻";
-            permitted = true;
-            window.requestAnimationFrame(painter);
-            start();
-        }
-    }, 4);
+        var x = 0.1;
+        let k = setInterval(function () {
+            canvas.style.opacity = x;
+            x += 0.01;
+            if (x > 1)
+            {
+                clearInterval(k);
+                if (wincontent == false)
+                    reset.innerHTML = "Flush🧻";
+                permitted = true;
+                window.requestAnimationFrame(painter);
+                start();
+            }
+        }, 4);
+    });
+    
 
 }
 function changeTheme(newcol) {
