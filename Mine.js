@@ -87,7 +87,7 @@ class Mine
         if(this.getHasBomb)
         this.mainAppearance="linear-gradient(150deg,#111111,#750a05)";
         else
-        this.mainAppearance="linear-gradient(150deg,#555,#067022)";
+        this.mainAppearance="linear-gradient(150deg,#555,#000000)";
         this.face.style.background=this.mainAppearance;
         if(this.getHasBomb==false)
         increaseScore();

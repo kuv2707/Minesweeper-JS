@@ -100,11 +100,11 @@ function putBombsIn(minesArray, except) {
 const fireGameEnd = function (boolResult) {
     if (boolResult) {
         scoreStatus.innerHTML = "🎆You WON!🎆";
-        scoreStatus.style.color = "#1bbfb7";
+        //scoreStatus.style.color = "#1bbfb7";
         wincontent = true;
     }
     else {
-        scoreStatus.style.color = "#ad1a1a";
+        //scoreStatus.style.color = "#ad1a1a";
         scoreStatus.innerHTML = "🤦🏻‍♂️You LOST!!🙄";
         wincontent = false;
     }

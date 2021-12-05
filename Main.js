@@ -28,24 +28,27 @@ for (let i = 0; i < yLim; i++) {
 
 
 var inst;
-reset.addEventListener("click", resetter);
-var x = 0;
-var grad = setInterval(function () {
-    if (gameActive == false)
-        clearInterval(grad);
-    let blue = 93;
-    let green = 170;
-    let red = Math.sin(x) * 100 + 127;
-    x += 0.05;
-    let color = "rgb(" + red + ',' + green + ',' + blue + ')';
-    var bodyStyle = document.querySelector("body").style;
-    
-    bodyStyle.background = "linear-gradient(140deg,#FFFFFF," + color + ")";
-    bodyStyle.backgroundRepeat = "no-repeat";
-    bodyStyle.backgroundAttachment = "fixed";
+$(document).ready(function()
+{
+    reset.addEventListener("click", resetter);
+    var x = 0;
+    var grad = setInterval(function () {
+        if (gameActive == false)
+            clearInterval(grad);
+        let blue = 93;
+        let green = 170;
+        let red = Math.sin(x) * 100 + 127;
+        x += 0.05;
+        let color = "rgb(" + red + ',' + green + ',' + blue + ')';
+        var bodyStyle = $("body")[0].style;
+        
+        bodyStyle.background = "linear-gradient(140deg,#FFFFFF," + color + ")";
+        bodyStyle.backgroundRepeat = "no-repeat";
+        bodyStyle.backgroundAttachment = "fixed";
 
 
-}, 200);
+    }, 200);
+});
 var seconds = 0, minutes = 0, hours = 0;
 let lab1 = document.createElement('h6');
 lab1.innerHTML = "Background Color";
@@ -77,7 +80,7 @@ let instr=document.createElement("a");
 instr.href="google.com";
 
 instr.innerHTML="How to play?";
-dialog.appendChild(instr);
+//dialog.appendChild(instr);
 
 let ret = document.createElement("button");
 ret.innerHTML = "Done";
