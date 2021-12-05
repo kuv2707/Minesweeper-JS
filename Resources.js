@@ -1,8 +1,9 @@
 const FLAG = "🚩", BOMB = "💣", EMPTYSPACE = "&nbsp", DOUBT = "❓";
 var defCol = "#EFB9B9";
+/**
+ * colors of the numbers on the tiles
+ */
 const colorArray = ["black", "#11e5f0", "#e6e629", "#ebac7c", "#d97d14", "#eb6b57", "#e0420d", "#ed1515", "#960e0e"];
-
-
 const buttonContainer = document.createElement("div");
 buttonContainer.id = "buttonContainer";
 
@@ -44,7 +45,9 @@ const clickResponse = function () {
         //now reveal some random group of mines, in vicinity of currently pressed button
         revealRandomMines(this, true);
     }
-    else {
+    else
+    {
+        
         revealRandomMines(this, false);
     }
     getMineOfButton(this).reveal();
