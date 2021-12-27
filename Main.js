@@ -5,7 +5,7 @@ var timer = document.createElement("h4");
 var reset = document.createElement("button");
 scoreStatus.id = "scoreStatus";
 reset.id = "reset";
-reset.innerHTML = "Reset";
+reset.innerHTML = "Restart🔄";
 
 buttonContainer.appendChild(scoreStatus);
 buttonContainer.appendChild(timer);
@@ -64,7 +64,7 @@ let bombct=document.createElement("div");
 let lab=document.createElement("label");
 lab.innerHTML="Number of bombs: ";
 let select=document.createElement("select");
-for(let i=5;i<(xLim*yLim-5);i++)
+for(let i=5;i<(xLim*yLim/3);i++)
 {
     let opt=document.createElement("option");
     opt.innerHTML=i;
@@ -91,7 +91,7 @@ dialog.appendChild(ret);
 buttonContainer.appendChild(dialog);
 
 var settingsButton = document.createElement("button");
-settingsButton.innerHTML = "Settings";
+settingsButton.innerHTML = "Settings⚙️";
 settingsButton.id = "settings";
 var themeSync;
 settingsButton.addEventListener("click", function () {

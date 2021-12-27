@@ -102,9 +102,9 @@ function putBombsIn(minesArray, except) {
 }
 
 const fireGameEnd = function (boolResult) {
-    if (boolResult) {
+    if (!boolResult) {
         scoreStatus.innerHTML = "🎆You WON!🎆";
-        scoreStatus.style.color = "#1bbfb7";
+        scoreStatus.style.color = "#117A65";
         wincontent = true;
     }
     else {
@@ -175,7 +175,7 @@ var stopCanvas = function () {
         if (x < 0) {
             clearInterval(h);
             clearInterval(confettiMaker);
-            reset.innerHTML = "Reset";
+            reset.innerHTML = "Restart🔄";
             permitted = false;
             
                 
@@ -244,7 +244,7 @@ const initializeGame = function () {
     flagged = 0;
     score = 0;
     permitted = false;
-    reset.innerHTML = "Reset";
+    reset.innerHTML = "Restart🔄";
     mines.forEach(function (sda) {
         sda.forEach(function (e) {
 
@@ -308,8 +308,8 @@ function showWinBox() {
             if (x > 1)
             {
                 clearInterval(k);
-                if (wincontent == false)
-                    reset.innerHTML = "Flush🧻";
+                reset.innerHTML =wincontent == false? "Flush🧻":"🍽️";
+                
                 permitted = true;
                 window.requestAnimationFrame(painter);
                 start();
