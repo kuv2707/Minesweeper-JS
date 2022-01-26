@@ -9,6 +9,7 @@ var menter=function()
         
         this.style.background="linear-gradient(150deg,#FFFFFF,"+defCol+",#000000)";
         this.style.boxShadow="0px 0px 60px" + " rgb(154, 73, 228)";
+        this.style.zIndex="2";
 
     }
 }
@@ -16,6 +17,7 @@ var mleave=function()
 {
     this.style.background=getMineOfButton(this).mainAppearance;
     this.style.boxShadow="none";
+    this.style.zIndex="1";
 }
 class Mine
 {

@@ -7,6 +7,7 @@
     font-size:45px;
     margin:auto;
     overflow: hidden;
+    position: relative;
 }
 @font-face {
     font-family: defFont;
