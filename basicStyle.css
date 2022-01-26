@@ -8,6 +8,10 @@
     margin:auto;
     overflow: hidden;
 }
+@font-face {
+    font-family: defFont;
+    src: url(PAPYRUS.TTF);
+}
 :root
 {
     -thing:#0a1255;
@@ -19,7 +23,7 @@
 }
 *
 {
-    font-family:Copperplate, Papyrus, fantasy,"Roboto Slab", sans-serif;
+    font-family:defFont, sans-serif;
     
 }
 body
