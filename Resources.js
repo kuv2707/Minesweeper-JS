@@ -18,7 +18,11 @@ var BOMB_COUNT = 15, xLim = 10, yLim = 10, buttonSize = 80;
 var mines = new Array();
 var timerID;
 
-const clickResponse = function () {
+const clickResponse = function (e) {
+    if (e.shiftKey) {
+		flag.call(this, e);
+        return;
+	}
 
     if (gameActive == false)
         return;
